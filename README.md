@@ -10,10 +10,16 @@ An advanced, production-grade refactoring of the Forkify application. This archi
 
 ## ![Forkify App Hero Section](public/hero.png)
 
-## 🚀 Performance & Production Metrics
+
 
 - [**Live Demo:**](https://ahmed-let-front.github.io/Forkify/)
-- **Google Lighthouse Score:** 💯 **400/400** (Perfect 100/100 across Performance, Accessibility, Best Practices, and SEO).
+
+---
+
+## 🚀 Performance & Production Metrics
+
+ ![lightHouse](public/lighthouse.png)
+- **Google Lighthouse Score:** 💯 **400/400** (Perfect 100/100 across Performance, Accessibility, Best Practices, and SEO). 
 
 ---
 
