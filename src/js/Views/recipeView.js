@@ -33,7 +33,7 @@ class Recipe {
                 >
                 <div class="flex items-center gap-3 text-charcoal-600 font-bold">
                     <svg class="w-6 h-6 text-primary-500">
-                    <use href="/icons.svg#icon-clock"></use>
+                    <use href="./icons.svg#icon-clock"></use>
                     </svg>
                     <span>${this.#data.cookingTime}</span>
                     <span class="font-normal text-charcoal-400">minutes</span>
@@ -41,7 +41,7 @@ class Recipe {
 
                 <div class="flex items-center gap-3 text-charcoal-600 font-bold">
                     <svg class="w-6 h-6 text-primary-500">
-                    <use href="/icons.svg#icon-users"></use>
+                    <use href="./icons.svg#icon-users"></use>
                     </svg>
                     <output class="ser-count">${this.#data.servings}</output>
                     <span class="font-normal text-charcoal-400">servings</span>
@@ -51,23 +51,23 @@ class Recipe {
                         class="btn--tiny update-ing-btn dcreaseServingsBtn"
                         data-update-to="${this.#data.servings - 1}"
                     >
-                        <svg><use href="/icons.svg#icon-minus-circle"></use></svg>
+                        <svg><use href="./icons.svg#icon-minus-circle"></use></svg>
                     </button>
                     <button
                         class="btn--tiny update-ing-btn increaseServingsBtn"
                         data-update-to="${this.#data.servings + 1}"
                     >
-                        <svg><use href="/icons.svg#icon-plus-circle"></use></svg>
+                        <svg><use href="./icons.svg#icon-plus-circle"></use></svg>
                     </button>
                     </div>
                 </div>
 
                 <div class="flex items-center gap-4">
                     <div class="btn--round bg-primary-50 [background-image:none] ${this.#data.key ? '' : 'hidden'}">
-                    <svg><use href="/icons.svg#icon-user"></use></svg>
+                    <svg><use href="./icons.svg#icon-user"></use></svg>
                     </div>
                     <button class="btn--round btn--bookmark">
-                    <svg><use href="/icons.svg#icon-bookmark-2"></use></svg>
+                    <svg><use href="./icons.svg#icon-bookmark-2"></use></svg>
                     </button>
                 </div>
                 </div>
@@ -103,7 +103,7 @@ class Recipe {
                     target="_blank"
                 >
                     <span>Directions</span>
-                    <svg><use href="/icons.svg#icon-arrow-right"></use></svg>
+                    <svg><use href="./icons.svg#icon-arrow-right"></use></svg>
                 </a>
                 </div>`;
   }
@@ -112,7 +112,7 @@ class Recipe {
       .map(ing => {
         return `
                     <li class="recipe__ingredient text-xl text-charcoal-600">
-                            <svg class="w-5 h-5 text-primary-500 shrink-0"><use href="/icons.svg#icon-check"></use></svg>
+                            <svg class="w-5 h-5 text-primary-500 shrink-0"><use href="./icons.svg#icon-check"></use></svg>
                             <p>
                             <strong class="font-bold text-charcoal-800">${ing.quantity ? converDecimalToFraction(ing.quantity) : ''} ${ing.unit}</strong>
                             <span>${ing.description}</span>
@@ -131,7 +131,7 @@ class Recipe {
             class="w-20 h-20 rounded-full flex items-center justify-center bg-gradient-warm shadow-[0_12px_30px_-8px_rgba(249,115,22,0.5)] animate-float"
           >
             <svg class="w-10 h-10 text-white" aria-hidden="true">
-              <use href="/icons.svg#icon-smile-2" />
+              <use href="./icons.svg#icon-smile-2" />
             </svg>
           </div>
           <p

@@ -22,12 +22,12 @@ class BookMark {
     if (!recipe.bookMarked) {
       const btn = this.#parentEl.querySelector('.btn--bookmark');
       const useEl = btn.querySelector('use');
-      useEl.setAttribute('href', 'icons.svg#icon-bookmark-2');
+      useEl.setAttribute('href', './icons.svg#icon-bookmark-2');
       return;
     }
     const btn = this.#parentEl.querySelector('.btn--bookmark');
     const useEl = btn.querySelector('use');
-    useEl.setAttribute('href', 'icons.svg#icon-bookmark-fill');
+    useEl.setAttribute('href', './icons.svg#icon-bookmark-fill');
   }
   updateUiBookMarkCount(bookMarkCount) {
     const bookMarkCountEl = document.getElementById('bookmark-count');
@@ -53,7 +53,7 @@ class BookMark {
                 </p>
                 </div>
                 <div class="btn--round bg-primary-50 [background-image:none] ${recipe.key ? '' : 'hidden'}">
-                <svg><use href="/icons.svg#icon-user"></use></svg>
+                <svg><use href="./icons.svg#icon-user"></use></svg>
               </div>
             </a>
          </li>
@@ -82,7 +82,7 @@ class BookMark {
               <li class="p-6 text-center flex flex-col items-center gap-3">
                 <div>
                   <svg class="w-12 h-12 text-primary-400" aria-hidden="true">
-                    <use href="/icons.svg#icon-smile-2" />
+                    <use href="./icons.svg#icon-smile-2" />
                   </svg>
                 </div>
                 <p

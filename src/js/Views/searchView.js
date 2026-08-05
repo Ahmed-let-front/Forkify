@@ -20,7 +20,7 @@ class SearchView {
                 <img 
                   class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
                   src="${data.image_url}" 
-                  alt=""
+                  alt="${data.title}"
                   aria-hidden="true"
                 />
               </div>
@@ -33,7 +33,7 @@ class SearchView {
                 </p>
               </div>
               <div class="btn--round bg-primary-50 [background-image:none] ${data.key ? '' : 'hidden'}">
-                <svg><use href="/icons.svg#icon-user"></use></svg>
+                <svg><use href="./icons.svg#icon-user"></use></svg>
               </div>
             </a>
           </li> `;
@@ -75,7 +75,7 @@ class SearchView {
           <svg
             class="h-28 w-28 sm:h-36 sm:w-36 fill-orange-300 transition-transform duration-300 hover:scale-110 drop-shadow-sm"
           >
-            <use href="icons.svg#icon-cutlery"></use>
+            <use href="./icons.svg#icon-cutlery"></use>
           </svg>
           <h2
             class="text-3xl sm:text-5xl font-extrabold text-stone-800 mb-4 sm:mb-6 tracking-tight leading-tight"
