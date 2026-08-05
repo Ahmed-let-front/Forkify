@@ -76,12 +76,12 @@
     #f97316 0%,
     #dc2626 100%
   );
-  --animate-slide-up: slideUp 4s cubic-bezier(0.16, 1, 0.3, 1) both;
-  --animate-slide-down: slideDown 4s cubic-bezier(0.16, 1, 0.3, 1) both;
-  --animate-slide-left: slideLeft 4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slide-up: slideUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slide-down: slideDown 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slide-left: slideLeft 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-scale-in: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-shimmer: shimmer 1.6s linear infinite;
-  --animate-float: float 4s ease-in-out infinite;
+  --animate-float: float 1.5s ease-in-out infinite;
   --animate-heart-beat: heartBeat 1s ease-in-out infinite;
   --animate-pulse-soft: pulseSoft 2.4s ease-in-out infinite;
   --animate-pop: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
