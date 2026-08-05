@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Recipe App || Search over 1,000,000 recipes"
+    />
+    <link rel="shortcut icon" type="image/svg+xml" href="favicon.svg" />
+    <script src="src/js/main.js" type="module"></script>
+    <title>Forkify — Discover & Cook Amazing Recipes</title>
+  </head>
+  <body
+    class="min-h-screen font-sans antialiased text-charcoal-700 bg-gradient-cream"
+  >
+    <h1
+      class="sr-only my-8 bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-center font-bold text-transparent text-[clamp(2rem,2vw,2.25rem)]"
+    >
+      Forkify — Discover & Cook Amazing Recipes
+    </h1>
+    <main
+      class="max-w-[160rem] mx-auto p-6 md:p-10 grid gap-8 grid-cols-1 lg:grid-cols-[1fr_1.6fr]"
+    >
+      <header
+        class="sticky top-0 z-10 flex items-center flex-col gap-6 md:flex-row md:items-center md:justify-between lg:col-span-2 px-4 py-5 md:px-8 md:py-6 rounded-b-3xl bg-gradient-glass backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_10px_40px_-10px_rgba(249,115,22,0.15)] animate-slide-down"
+      >
+        <a
+          href="#"
+          class="flex items-center gap-3 no-underline hover:scale-[1.04] transition-transform duration-300 w-fit"
+          aria-label="Forkify home"
+        >
+          <span
+            class="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg bg-gradient-warm shadow-[0_8px_20px_-4px_rgba(249,115,22,0.5)]"
+          >
+            <svg class="w-6 h-6">
+              <use href="/icons.svg#icon-cutlery" />
+            </svg>
+          </span>
+          <span
+            class="font-extrabold tracking-tight text-charcoal-800 text-[clamp(2.4rem,3vw,3rem)] bg-gradient-text bg-clip-text text-transparent"
+            >Forkify</span
+          >
+        </a>
+        <form
+          class="flex-1 flex items-stretch max-w-2xl mx-auto w-full bg-white/70 rounded-full overflow-hidden border-2 border-transparent transition-transform duration-300 shadow-[0_4px_16px_-4px_rgba(249,115,22,0.15)] focus-within:border-[#fb923c] focus-within:shadow-[0_8px_24px_-4px_rgba(249,115,22,0.3)] focus-within:-translate-y-px"
+          role="search"
+          id="search-form"
+        >
+          <input
+            type="text"
+            id="search-input"
+            name="query"
+            class="flex-1 bg-transparent border-none outline-none overflow-hidden text-ellipsis px-6 text-charcoal-700 text-[clamp(1.4rem,1.4vw,1.6rem)] placeholder:text-charcoal-400"
+            placeholder="Search over 1,000,000 recipes..."
+            aria-label="Search recipes"
+          />
+          <button
+            class="btn rounded-none rounded-r-full md:px-4"
+            type="submit"
+            id="search-btn"
+          >
+            <svg class="w-5 h-5" aria-hidden="true">
+              <use href="/icons.svg#icon-search-stroke" />
+            </svg>
+            <span class="text-[clamp(0.8rem,2vw,1.4rem)]">Search</span>
+          </button>
+        </form>
+        <div class="flex items-center gap-3 list-none p-0 m-0">
+          <div class="relative">
+            <button class="nav__btn" id="open-modal-btn">
+              <svg class="nav__icon" aria-hidden="true">
+                <use href="/icons.svg#icon-edit-2" />
+              </svg>
+              <span>Add recipe</span>
+            </button>
+          </div>
+          <div class="relative">
+            <button class="nav__btn" id="toggle-bookmarks-btn">
+              <svg class="nav__icon" aria-hidden="true">
+                <use href="/icons.svg#icon-bookmark-2" />
+              </svg>
+              <span>Bookmarks</span>
+              <output class="nav__badge" id="bookmark-count">0</output>
+            </button>
+            <ul class="bookmarks max-h-96 overflow-y-auto" id="bookmarks-panel">
+              <li class="p-6 text-center flex flex-col items-center gap-3">
+                <div>
+                  <svg class="w-12 h-12 text-primary-400" aria-hidden="true">
+                    <use href="/icons.svg#icon-smile-2" />
+                  </svg>
+                </div>
+                <p
+                  class="text-charcoal-500 m-0 text-[clamp(1.2rem,1.1vw,1.4rem)]"
+                >
+                  No bookmarks yet. Find a nice recipe and bookmark it :)
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div
+        class="flex flex-col justify-between gap-6 w-full"
+        id="search-res-container"
+      >
+        <div
+          class="flex flex-col animate-slide-up items-center justify-center text-center p-8 sm:p-12 md:p-16 bg-white rounded-3xl shadow-2xl shadow-black/30 text-xl gap-6 w-full"
+          id="welcome-view"
+        >
+          <svg
+            class="h-28 w-28 sm:h-36 sm:w-36 fill-orange-300 transition-transform duration-300 hover:scale-110 drop-shadow-sm"
+          >
+            <use href="icons.svg#icon-cutlery"></use>
+          </svg>
+          <h2
+            class="text-3xl sm:text-5xl font-extrabold text-stone-800 mb-4 sm:mb-6 tracking-tight leading-tight"
+          >
+            Let's Get Cooking!
+          </h2>
+
+          <p
+            class="leading-relaxed text-stone-600 sm:mb-10 max-w-xl font-normal"
+          >
+            Search for over 1,000,000 delicious recipes by ingredient or name.
+            Need inspiration? Try something popular below!
+          </p>
+
+          <div
+            class="flex flex-wrap items-center justify-center gap-5 sm:gap-4"
+          >
+            <h3
+              class="w-full font-bold text-stone-500 uppercase tracking-widest mb-2"
+            >
+              Popular searches:
+            </h3>
+            <div
+              class="btns-welcome-view flex items-center gap-6 flex-wrap justify-center"
+            >
+              <button data-query="pizza" class="btn-welcome-view">Pizza</button>
+              <button data-query="pasta" class="btn-welcome-view">Pasta</button>
+              <button data-query="burger" class="btn-welcome-view">
+                Burgers
+              </button>
+              <button data-query="avocado" class="btn-welcome-view">
+                Avocado
+              </button>
+            </div>
+          </div>
+        </div>
+        <footer class="mt-6">
+          <div
+            class="flex items-center justify-between gap-4 mb-8 px-2 hidden-container"
+            id="pagination-container"
+          >
+            <button
+              class="btn--inline flex items-center gap-2"
+              id="prev-page-btn"
+            >
+              <svg class="w-5 h-5" aria-hidden="true">
+                <use href="/icons.svg#icon-arrow-left-2" />
+              </svg>
+              <span> Page <span class="prev-page-num"></span></span>
+            </button>
+            <p
+              class="border-2 bg-white/80 px-5 py-2.5 rounded-xl font-bold text-primary-600 text-sm sm:text-xl border-[#fed7aa]"
+            >
+              Pages Count: <span class="page-count"></span>
+            </p>
+            <button
+              class="btn--inline flex items-center gap-2"
+              id="next-page-btn"
+            >
+              <span>Page <span class="next-page-num"></span></span>
+              <svg class="w-5 h-5" aria-hidden="true">
+                <use href="/icons.svg#icon-arrow-right-2" />
+              </svg>
+            </button>
+          </div>
+          <p
+            class="text-center text-charcoal-500 m-0 text-[clamp(1.1rem,1vw,1.3rem)]"
+          >
+            &copy; Crafted with
+            <span
+              class="inline-block text-accent-500 animate-heart-beat"
+              aria-hidden="true"
+              >&#9829;</span
+            >
+            by
+            <a
+              class="text-primary-600 font-bold no-underline transition-colors duration-200 hover:text-accent-600"
+              target="_blank"
+              rel="noopener"
+              href="https://twitter.com/jonasschmedtman"
+              >Jonas Schmedtmann</a
+            >
+            . For learning &amp; portfolio. Don't claim as your own.
+          </p>
+        </footer>
+      </div>
+      <div
+        class="bg-white rounded-3xl overflow-hidden border border-[rgba(254,215,170,0.4)] shadow-[0_4px_30px_-8px_rgba(0,0,0,0.08)] animate-slide-left"
+        id="recipe-container"
+      >
+        <div
+          class="flex flex-col items-center justify-center text-center gap-5 px-8 py-20 md:py-32"
+        >
+          <div
+            class="w-20 h-20 rounded-full flex items-center justify-center bg-gradient-warm shadow-[0_12px_30px_-8px_rgba(249,115,22,0.5)] animate-float"
+          >
+            <svg class="w-10 h-10 text-white" aria-hidden="true">
+              <use href="/icons.svg#icon-smile-2" />
+            </svg>
+          </div>
+          <p
+            class="max-w-md text-charcoal-500 m-0 text-[clamp(1.4rem,1.3vw,1.7rem)]"
+          >
+            Start by searching for a recipe or an ingredient. Have fun!
+          </p>
+        </div>
+      </div>
+    </main>
+    <div class="overlay" id="modal-overlay"></div>
+    <div
+      class="popup fixed top-6 right-6 z-70 text-[1.5rem] flex items-center gap-3.5 p-6 rounded-2xl bg-gradient-glass backdrop-blur-xl border border-white shadow-[0_10px_30px_-5px_rgba(249,115,22,0.2)] opacity-0 translate-x-[50rem] pointer-events-none transition-all duration-300 [&.is-open]:translate-x-0 [&.is-open]:opacity-100 [&.is-open]:pointer-events-auto drop-shadow-2xl shadow-black/50"
+      id="custom-popup"
+      role="alert"
+    >
+      <div
+        class="size-10 rounded-xl text-white grid place-items-center bg-gradient-warm shadow-md shadow-primary-500/30 font-black icon-popup"
+        aria-hidden="true"
+      >
+        &#10003;
+      </div>
+      <p
+        class="text-charcoal-800 font-semibold m-0 leading-snug tracking-tight popup-msg"
+      >
+        Your favorite recipe has been saved successfully!
+      </p>
+      <button
+        class="size-10 rounded-full bg-primary-100 text-charcoal-600 border-none grid place-content-center font-medium cursor-pointer transition-transform duration-200 hover:bg-primary-500 hover:text-white hover:rotate-180"
+        id="close-popup-btn"
+        aria-label="Close popup"
+      >
+        &times;
+      </button>
+    </div>
+    <div
+      class="fixed top-1/2 left-1/2 -translate-1/2 opacity-0 z-60 flex items-center justify-center w-fit pointer-events-none [&.is-open]:pointer-events-auto [&.is-open]:opacity-100 duration-300 transition-[opacity_pointer-events]"
+      id="recipe-modal"
+      role="dialog"
+      aria-modal="false"
+      aria-labelledby="upload-title"
+    >
+      <div
+        class="relative w-[25rem] md:w-5xl lg:w-6xl max-h-[80vh] overflow-y-auto rounded-3xl bg-cream-50 p-6 md:p-10 shadow-2xl border border-cream-200"
+      >
+        <button
+          class="absolute top-5 right-5 z-10 flex size-10 text-2xl cursor-pointer items-center justify-center rounded-full bg-cream-100 text-charcoal-600 transition-all duration-300 hover:bg-primary-500 hover:text-white"
+          id="close-modal-btn"
+          aria-label="Close modal"
+        >
+          &times;
+        </button>
+
+        <form id="upload-form" class="flex flex-col gap-8">
+          <div class="flex items-center border-b border-cream-200 pb-4">
+            <h2
+              id="upload-title"
+              class="flex items-center gap-3 text-2xl md:text-3xl font-bold text-charcoal-700"
+            >
+              <span
+                class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-100 text-primary-600"
+              >
+                <svg aria-hidden="true" class="h-5 w-5 fill-current">
+                  <use href="/icons.svg#icon-edit-2" />
+                </svg>
+              </span>
+              Recipe Data
+            </h2>
+          </div>
+
+          <div class="flex flex-col md:flex-row gap-6">
+            <div class="flex flex-col flex-1 gap-4">
+              <h3
+                class="flex items-center gap-3 text-xl md:text-2xl font-bold text-charcoal-700 mb-2"
+              >
+                <span
+                  class="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-100 text-primary-600"
+                >
+                  <svg aria-hidden="true" class="h-4 w-4 fill-current">
+                    <use href="/icons.svg#icon-edit-2" />
+                  </svg>
+                </span>
+                Recipe Information
+              </h3>
+
+              <div class="flex flex-col">
+                <label
+                  for="recipe-title"
+                  class="block text-base md:text-lg font-semibold text-charcoal-700 mb-1"
+                  >Title</label
+                >
+                <input
+                  id="recipe-title"
+                  required
+                  name="title"
+                  type="text"
+                  value="Test Pizza"
+                  placeholder="e.g. Avocado Toast"
+                  class="w-full rounded-xl border border-cream-300 bg-white px-4 py-3 md:py-3.5 text-charcoal-800 placeholder-charcoal-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all text-lg md:text-xl"
+                />
+              </div>
+
+              <div class="flex flex-col">
+                <label
+                  for="recipe-source-url"
+                  class="block text-base md:text-lg font-semibold text-charcoal-700 mb-1"
+                  >URL</label
+                >
+                <input
+                  id="recipe-source-url"
+                  required
+                  name="sourceUrl"
+                  type="url"
+                  value="https://google.com"
+                  placeholder="https://example.com/recipe"
+                  class="w-full rounded-xl border border-cream-300 bg-white px-4 py-3 md:py-3.5 text-charcoal-800 placeholder-charcoal-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all text-lg md:text-xl"
+                />
+              </div>
+
+              <div class="flex flex-col">
+                <label
+                  for="recipe-image"
+                  class="block text-base md:text-lg font-semibold text-charcoal-700 mb-1"
+                  >Image URL</label
+                >
+                <input
+                  id="recipe-image"
+                  required
+                  name="image"
+                  type="url"
+                  value="https://images.unsplash.com/photo-1513104890138-7c749659a591"
+                  placeholder="https://example.com/image.jpg"
+                  class="w-full rounded-xl border border-cream-300 bg-white px-4 py-3 md:py-3.5 text-charcoal-800 placeholder-charcoal-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all text-lg md:text-xl"
+                />
+              </div>
+
+              <div class="flex flex-col">
+                <label
+                  for="recipe-publisher"
+                  class="block text-base md:text-lg font-semibold text-charcoal-700 mb-1"
+                  >Publisher</label
+                >
+                <input
+                  id="recipe-publisher"
+                  required
+                  name="publisher"
+                  type="text"
+                  value="Ahmed"
+                  placeholder="e.g. Food Network"
+                  class="w-full rounded-xl border border-cream-300 bg-white px-4 py-3 md:py-3.5 text-charcoal-800 placeholder-charcoal-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all text-lg md:text-xl"
+                />
+              </div>
+
+              <div class="flex flex-row gap-4">
+                <div class="flex flex-col flex-1">
+                  <label
+                    for="recipe-cooking-time"
+                    class="block text-base md:text-lg font-semibold text-charcoal-700 mb-1"
+                    >Prep Time (min)</label
+                  >
+                  <input
+                    id="recipe-cooking-time"
+                    required
+                    name="cookingTime"
+                    type="number"
+                    min="1"
+                    value="20"
+                    placeholder="45"
+                    class="w-full rounded-xl border border-cream-300 bg-white px-4 py-3 md:py-3.5 text-charcoal-800 placeholder-charcoal-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all text-lg md:text-xl"
+                  />
+                </div>
+
+                <div class="flex flex-col flex-1">
+                  <label
+                    for="recipe-servings"
+                    class="block text-base md:text-lg font-semibold text-charcoal-700 mb-1"
+                    >Servings</label
+                  >
+                  <input
+                    id="recipe-servings"
+                    required
+                    name="servings"
+                    type="number"
+                    min="1"
+                    value="4"
+                    placeholder="4"
+                    class="w-full rounded-xl border border-cream-300 bg-white px-4 py-3 md:py-3.5 text-charcoal-800 placeholder-charcoal-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all text-lg md:text-xl"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col flex-1 gap-4">
+              <h3
+                class="flex items-center gap-3 text-xl md:text-2xl font-bold text-charcoal-700 mb-2"
+              >
+                <span
+                  class="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-100 text-primary-600"
+                >
+                  <svg aria-hidden="true" class="h-4 w-4 fill-current">
+                    <use href="/icons.svg#icon-bookmark-2" />
+                  </svg>
+                </span>
+                Ingredients
+              </h3>
+
+              <div class="flex flex-col">
+                <label
+                  for="ingredient-1"
+                  class="block text-base md:text-lg font-semibold text-charcoal-700 mb-1"
+                  >Ingredient 1</label
+                >
+                <input
+                  id="ingredient-1"
+                  type="text"
+                  required
+                  name="ingredient-1"
+                  value="0.5,kg,Rice"
+                  placeholder="0.5,kg,Rice"
+                  class="w-full rounded-xl border border-cream-300 bg-white px-4 py-3 md:py-3.5 text-charcoal-800 placeholder-charcoal-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all text-lg md:text-xl"
+                />
+              </div>
+
+              <div class="flex flex-col">
+                <label
+                  for="ingredient-2"
+                  class="block text-base md:text-lg font-semibold text-charcoal-700 mb-1"
+                  >Ingredient 2</label
+                >
+                <input
+                  id="ingredient-2"
+                  type="text"
+                  name="ingredient-2"
+                  value="1,tbsp,Olive Oil"
+                  placeholder="1,tbsp,Olive Oil"
+                  class="w-full rounded-xl border border-cream-300 bg-white px-4 py-3 md:py-3.5 text-charcoal-800 placeholder-charcoal-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all text-lg md:text-xl"
+                />
+              </div>
+
+              <div class="flex flex-col">
+                <label
+                  for="ingredient-3"
+                  class="block text-base md:text-lg font-semibold text-charcoal-700 mb-1"
+                  >Ingredient 3</label
+                >
+                <input
+                  id="ingredient-3"
+                  type="text"
+                  name="ingredient-3"
+                  value=""
+                  placeholder="Format: Quantity,Unit,Description"
+                  class="w-full rounded-xl border border-cream-300 bg-white px-4 py-3 md:py-3.5 text-charcoal-800 placeholder-charcoal-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all text-lg md:text-xl"
+                />
+              </div>
+
+              <div class="flex flex-col">
+                <label
+                  for="ingredient-4"
+                  class="block text-base md:text-lg font-semibold text-charcoal-700 mb-1"
+                  >Ingredient 4</label
+                >
+                <input
+                  id="ingredient-4"
+                  type="text"
+                  name="ingredient-4"
+                  value=""
+                  placeholder="Format: Quantity,Unit,Description"
+                  class="w-full rounded-xl border border-cream-300 bg-white px-4 py-3 md:py-3.5 text-charcoal-800 placeholder-charcoal-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all text-lg md:text-xl"
+                />
+              </div>
+
+              <div class="flex flex-col">
+                <label
+                  for="ingredient-5"
+                  class="block text-base md:text-lg font-semibold text-charcoal-700 mb-1"
+                  >Ingredient 5</label
+                >
+                <input
+                  id="ingredient-5"
+                  type="text"
+                  name="ingredient-5"
+                  value=""
+                  placeholder="Format: Quantity,Unit,Description"
+                  class="w-full rounded-xl border border-cream-300 bg-white px-4 py-3 md:py-3.5 text-charcoal-800 placeholder-charcoal-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all text-lg md:text-xl"
+                />
+              </div>
+
+              <div class="flex flex-col">
+                <label
+                  for="ingredient-6"
+                  class="block text-base md:text-lg font-semibold text-charcoal-700 mb-1"
+                  >Ingredient 6</label
+                >
+                <input
+                  id="ingredient-6"
+                  type="text"
+                  name="ingredient-6"
+                  value=""
+                  placeholder="Format: Quantity,Unit,Description"
+                  class="w-full rounded-xl border border-cream-300 bg-white px-4 py-3 md:py-3.5 text-charcoal-800 placeholder-charcoal-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all text-lg md:text-xl"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end pt-4">
+            <button
+              type="submit"
+              id="upload-btn"
+              class="flex items-center gap-2 cursor-pointer rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 px-8 py-4 text-lg md:text-xl font-bold text-white shadow-lg shadow-primary-500/25 transition-all duration-300 hover:from-primary-600 hover:to-accent-600 hover:shadow-primary-600/40 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+            >
+              <svg aria-hidden="true" class="h-6 w-6 fill-current">
+                <use href="/icons.svg#icon-upload" />
+              </svg>
+              <span>Upload Recipe</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
