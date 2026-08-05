@@ -49,7 +49,7 @@
                 >
                 <div class="flex items-center gap-3 text-charcoal-600 font-bold">
                     <svg class="w-6 h-6 text-primary-500">
-                    <use href="/icons.svg#icon-clock"></use>
+                    <use href="./icons.svg#icon-clock"></use>
                     </svg>
                     <span>${this.#t.cookingTime}</span>
                     <span class="font-normal text-charcoal-400">minutes</span>
@@ -57,7 +57,7 @@
 
                 <div class="flex items-center gap-3 text-charcoal-600 font-bold">
                     <svg class="w-6 h-6 text-primary-500">
-                    <use href="/icons.svg#icon-users"></use>
+                    <use href="./icons.svg#icon-users"></use>
                     </svg>
                     <output class="ser-count">${this.#t.servings}</output>
                     <span class="font-normal text-charcoal-400">servings</span>
@@ -67,23 +67,23 @@
                         class="btn--tiny update-ing-btn dcreaseServingsBtn"
                         data-update-to="${this.#t.servings-1}"
                     >
-                        <svg><use href="/icons.svg#icon-minus-circle"></use></svg>
+                        <svg><use href="./icons.svg#icon-minus-circle"></use></svg>
                     </button>
                     <button
                         class="btn--tiny update-ing-btn increaseServingsBtn"
                         data-update-to="${this.#t.servings+1}"
                     >
-                        <svg><use href="/icons.svg#icon-plus-circle"></use></svg>
+                        <svg><use href="./icons.svg#icon-plus-circle"></use></svg>
                     </button>
                     </div>
                 </div>
 
                 <div class="flex items-center gap-4">
                     <div class="btn--round bg-primary-50 [background-image:none] ${this.#t.key?``:`hidden`}">
-                    <svg><use href="/icons.svg#icon-user"></use></svg>
+                    <svg><use href="./icons.svg#icon-user"></use></svg>
                     </div>
                     <button class="btn--round btn--bookmark">
-                    <svg><use href="/icons.svg#icon-bookmark-2"></use></svg>
+                    <svg><use href="./icons.svg#icon-bookmark-2"></use></svg>
                     </button>
                 </div>
                 </div>
@@ -119,11 +119,11 @@
                     target="_blank"
                 >
                     <span>Directions</span>
-                    <svg><use href="/icons.svg#icon-arrow-right"></use></svg>
+                    <svg><use href="./icons.svg#icon-arrow-right"></use></svg>
                 </a>
                 </div>`}#r(){return this.#t.ingredients.map(e=>`
                     <li class="recipe__ingredient text-xl text-charcoal-600">
-                            <svg class="w-5 h-5 text-primary-500 shrink-0"><use href="/icons.svg#icon-check"></use></svg>
+                            <svg class="w-5 h-5 text-primary-500 shrink-0"><use href="./icons.svg#icon-check"></use></svg>
                             <p>
                             <strong class="font-bold text-charcoal-800">${e.quantity?s(e.quantity):``} ${e.unit}</strong>
                             <span>${e.description}</span>
@@ -137,7 +137,7 @@
             class="w-20 h-20 rounded-full flex items-center justify-center bg-gradient-warm shadow-[0_12px_30px_-8px_rgba(249,115,22,0.5)] animate-float"
           >
             <svg class="w-10 h-10 text-white" aria-hidden="true">
-              <use href="/icons.svg#icon-smile-2" />
+              <use href="./icons.svg#icon-smile-2" />
             </svg>
           </div>
           <p
@@ -152,7 +152,7 @@
                 <img 
                   class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
                   src="${e.image_url}" 
-                  alt=""
+                  alt="${e.title}"
                   aria-hidden="true"
                 />
               </div>
@@ -165,7 +165,7 @@
                 </p>
               </div>
               <div class="btn--round bg-primary-50 [background-image:none] ${e.key?``:`hidden`}">
-                <svg><use href="/icons.svg#icon-user"></use></svg>
+                <svg><use href="./icons.svg#icon-user"></use></svg>
               </div>
             </a>
           </li> `}#r(){return this.#t.searchInput.value.trim()}injectionMarkupListContainer(){let e=document.getElementById(`welcome-view`);e&&e.remove(),this.#t.searchResContianer.insertAdjacentHTML(`afterbegin`,`
@@ -178,7 +178,7 @@
           <svg
             class="h-28 w-28 sm:h-36 sm:w-36 fill-orange-300 transition-transform duration-300 hover:scale-110 drop-shadow-sm"
           >
-            <use href="icons.svg#icon-cutlery"></use>
+            <use href="./icons.svg#icon-cutlery"></use>
           </svg>
           <h2
             class="text-3xl sm:text-5xl font-extrabold text-stone-800 mb-4 sm:mb-6 tracking-tight leading-tight"
@@ -213,7 +213,7 @@
                 Avocado
               </button>
             </div>
-        `)}unFoucsOnSerchInput(){document.activeElement.blur()}getQueryFromClickBtn(e){return e.target.dataset.query}renderPageNum(e,t){this.#t.nextPageNum.textContent=e===t?1:e+1,this.#t.prevPageNum.textContent=e===1?t:e-1}removeAnyListSelcted(e){e&&e.querySelector(`.bg-cream-200`)?.classList.remove(`bg-cream-200`)}addHandlerListsResults(){this.#e.addEventListener(`click`,e=>{let t=e.target.closest(`.list-result`);t?.classList.contains(`bg-cream-200`)||(this.removeAnyListSelcted(this.#t.bookmarksPanel),this.removeAnyListSelcted(e.currentTarget),t&&t.classList.add(`bg-cream-200`))})}addHandlerBtnsWelcomeView(e){document.querySelector(`.btns-welcome-view`).addEventListener(`click`,t=>{t.target.classList.contains(`btn-welcome-view`)&&e(t)})}addHandlerRenderSearchRes(e){this.#t.formSearch.addEventListener(`submit`,t=>{t.preventDefault(),e(this.#r())})}},S=new class{parentEl;#e={prevPageBtn:document.getElementById(`prev-page-btn`),nextPageBtn:document.getElementById(`next-page-btn`)};setParentEl(){this.parentEl=document.getElementById(`results-list`)}addHandlerPangationNext(e){this.setParentEl(),this.#e.nextPageBtn.addEventListener(`click`,e)}addHandlerPangationPrev(e){this.setParentEl(),this.#e.prevPageBtn.addEventListener(`click`,e)}},C=new class{#e=document.getElementById(`recipe-container`);#t={bookmarkBtn:document.getElementById(`toggle-bookmarks-btn`),bookMarkList:document.querySelector(`.bookmarks`),overlay:document.getElementById(`modal-overlay`)};addHandlerBookMark(e){this.#e.addEventListener(`click`,t=>{t.target.closest(`.btn--bookmark`)&&e()})}toogleRenderBookmark(e){if(!e.bookMarked){this.#e.querySelector(`.btn--bookmark`).querySelector(`use`).setAttribute(`href`,`icons.svg#icon-bookmark-2`);return}this.#e.querySelector(`.btn--bookmark`).querySelector(`use`).setAttribute(`href`,`icons.svg#icon-bookmark-fill`)}updateUiBookMarkCount(e){let t=document.getElementById(`bookmark-count`);t.textContent=e}#n(e){return`
+        `)}unFoucsOnSerchInput(){document.activeElement.blur()}getQueryFromClickBtn(e){return e.target.dataset.query}renderPageNum(e,t){this.#t.nextPageNum.textContent=e===t?1:e+1,this.#t.prevPageNum.textContent=e===1?t:e-1}removeAnyListSelcted(e){e&&e.querySelector(`.bg-cream-200`)?.classList.remove(`bg-cream-200`)}addHandlerListsResults(){this.#e.addEventListener(`click`,e=>{let t=e.target.closest(`.list-result`);t?.classList.contains(`bg-cream-200`)||(this.removeAnyListSelcted(this.#t.bookmarksPanel),this.removeAnyListSelcted(e.currentTarget),t&&t.classList.add(`bg-cream-200`))})}addHandlerBtnsWelcomeView(e){document.querySelector(`.btns-welcome-view`).addEventListener(`click`,t=>{t.target.classList.contains(`btn-welcome-view`)&&e(t)})}addHandlerRenderSearchRes(e){this.#t.formSearch.addEventListener(`submit`,t=>{t.preventDefault(),e(this.#r())})}},S=new class{parentEl;#e={prevPageBtn:document.getElementById(`prev-page-btn`),nextPageBtn:document.getElementById(`next-page-btn`)};setParentEl(){this.parentEl=document.getElementById(`results-list`)}addHandlerPangationNext(e){this.setParentEl(),this.#e.nextPageBtn.addEventListener(`click`,e)}addHandlerPangationPrev(e){this.setParentEl(),this.#e.prevPageBtn.addEventListener(`click`,e)}},C=new class{#e=document.getElementById(`recipe-container`);#t={bookmarkBtn:document.getElementById(`toggle-bookmarks-btn`),bookMarkList:document.querySelector(`.bookmarks`),overlay:document.getElementById(`modal-overlay`)};addHandlerBookMark(e){this.#e.addEventListener(`click`,t=>{t.target.closest(`.btn--bookmark`)&&e()})}toogleRenderBookmark(e){if(!e.bookMarked){this.#e.querySelector(`.btn--bookmark`).querySelector(`use`).setAttribute(`href`,`./icons.svg#icon-bookmark-2`);return}this.#e.querySelector(`.btn--bookmark`).querySelector(`use`).setAttribute(`href`,`./icons.svg#icon-bookmark-fill`)}updateUiBookMarkCount(e){let t=document.getElementById(`bookmark-count`);t.textContent=e}#n(e){return`
         <li class="preview-list" data-id="${e.id}">
             <a href="#${e.id}" class="list-result flex items-center gap-5 p-4 rounded-2xl bg-cream-50/60 hover:bg-cream-100/80 border border-cream-200/60 transition-all duration-300 hover:shadow-lg  group">
                 <div class="preview__fig relative w-20 h-20 rounded-2xl overflow-hidden shrink-0 border border-cream-200 shadow-sm" role="img" aria-label="${e.title} photo">
@@ -232,7 +232,7 @@
                 </p>
                 </div>
                 <div class="btn--round bg-primary-50 [background-image:none] ${e.key?``:`hidden`}">
-                <svg><use href="/icons.svg#icon-user"></use></svg>
+                <svg><use href="./icons.svg#icon-user"></use></svg>
               </div>
             </a>
          </li>
@@ -240,7 +240,7 @@
               <li class="p-6 text-center flex flex-col items-center gap-3">
                 <div>
                   <svg class="w-12 h-12 text-primary-400" aria-hidden="true">
-                    <use href="/icons.svg#icon-smile-2" />
+                    <use href="./icons.svg#icon-smile-2" />
                   </svg>
                 </div>
                 <p
