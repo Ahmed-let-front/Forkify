@@ -42,6 +42,7 @@ class SearchView {
     return this.#elements.searchInput.value.trim();
   }
   injectionMarkupListContainer() {
+    if (document.getElementById('results-list')) return;
     const markup = `
      <ul class="flex flex-col gap-4" id="results-list"></ul>
     `;

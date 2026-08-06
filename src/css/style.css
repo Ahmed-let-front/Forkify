@@ -78,7 +78,6 @@
   );
   --animate-slide-up: slideUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-slide-down: slideDown 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-  --animate-slide-left: slideLeft 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-scale-in: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-shimmer: shimmer 1.6s linear infinite;
   --animate-float: float 1.5s ease-in-out infinite;
@@ -88,6 +87,8 @@
   --animate-bounce-soft: bounceSoft 2s ease-in-out infinite;
   --animate-spin-slow: spin 2.4s linear infinite;
   --animate-toast-in: toastIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  --breakpoint-xs: 340px
 }
 
 @layer base {

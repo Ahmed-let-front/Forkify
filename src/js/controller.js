@@ -29,11 +29,11 @@ const controlDataFromLocalStrotge = () => {
 };
 const controlSearchRes = async query => {
   searchView.injectionMarkupListContainer();
+  view.renderSkeltonRes(searchView.parentEl);
   searchView.addHandlerListsResults();
   searchView.unFoucsOnSerchInput();
   pagination.addHandlerPangationNext(controlPangationBtnNext);
   pagination.addHandlerPangationPrev(controlPangationBtnPrev);
-  view.renderSkeltonRes(searchView.parentEl);
   searchView.renderResContainerList(await model.loadSearchResData(query));
   searchView.renderPageNum(
     model.state.search.currPage,
@@ -46,7 +46,7 @@ const controlSearchRes = async query => {
 const controlSearchResults = async query => {
   try {
     if (query === '') return;
-    await controlSearchRes(query);
+    await controlSearchRes(query)
   } catch (err) {
     searchView.returnToWelcomeView();
     searchView.addHandlerBtnsWelcomeView(controlWelcomeView);
