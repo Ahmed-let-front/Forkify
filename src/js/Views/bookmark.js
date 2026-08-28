@@ -147,6 +147,7 @@ class BookMark {
   }
   handlerCloseList() {
     this.#elements.overlay.addEventListener('click', e => {
+      if (!this.#elements.bookMarkList.classList.contains('is-open')) return;
       this.#elements.bookMarkList.classList.remove('is-open');
       e.currentTarget.classList.remove('is-open');
     });

@@ -1,4 +1,11 @@
-import { DECIMAL_BASE, API_URL, RES_PER_PAGE, KEY } from './config.js';
+import {
+  DECIMAL_BASE,
+  API_URL,
+  RES_PER_PAGE,
+  KEY,
+  USDA_API_URL,
+  USDA_KEY,
+} from './config.js';
 import { AJAX } from './helpers.js';
 
 /**
@@ -67,6 +74,8 @@ export const state = {
     countBooMarks: 0,
     bookmarksArr: [],
   },
+  shoppingListArr: [],
+  mealPlanArr: [],
 };
 let countReicpes = 7;
 /**
@@ -115,11 +124,13 @@ export const converDecimalToFraction = decimal => {
   const gcd = getGCD(denominator, numerator);
   return `${numerator / gcd}/${denominator / gcd}`;
 };
-export const getPageData = (page = state.search.currPage) => {
+export const getPageData = (page = state.search.currPage, dataType) => {
   state.search.currPage = page;
   let start = (page - 1) * RES_PER_PAGE;
   let end = page * RES_PER_PAGE;
-  return state.search.results.slice(start, end);
+  if (dataType === 'detailed')
+    return state.search.detailedResults.slice(start, end);
+  else return state.search.results.slice(start, end);
 };
 /**
  * @param {string} query
@@ -227,7 +238,79 @@ export const uploadRecipe = async data => {
     ingredients,
   };
   const dataNewRecipe = await AJAX(`${API_URL}?key=${KEY}`, recipe);
-  console.log(dataNewRecipe);
   state.recipe = createRecipeObject(dataNewRecipe);
   addBookMark(state.recipe);
+};
+export const sortBy = async e => {
+  if (
+    !state.search.detailedResults?.some(
+      el => el.id === state.search.results[0].id,
+    )
+  ) {
+    const IDS = state.search.results.map(el => el.id);
+    state.search.detailedResults = await Promise.all(
+      IDS.map(id => AJAX(`${API_URL}/${id}?key=${KEY}`)),
+    );
+    state.search.detailedResults = state.search.detailedResults.map(
+      el => el.data.recipe,
+    );
+  }
+  if (e.target.value === 'duration') {
+    state.search.detailedResults.sort(
+      (a, b) => b.cooking_time - a.cooking_time,
+    );
+  } else
+    state.search.detailedResults.sort(
+      (a, b) => b.ingredients.length - a.ingredients.length,
+    );
+  return getPageData(state.search.currPage, 'detailed');
+};
+export const addShoppingList = () => {
+  if (state.shoppingListArr?.some(rec => rec.id === state.recipe.id))
+    throw Error('This was added previously.');
+  state.shoppingListArr.push(state.recipe);
+  localStorage.setItem(
+    'shoppingListArr',
+    JSON.stringify(state.shoppingListArr),
+  );
+};
+export const removeShoppingList = id => {
+  state.shoppingListArr = state.shoppingListArr.filter(el => el.id !== id);
+  localStorage.setItem(
+    'shoppingListArr',
+    JSON.stringify(state.shoppingListArr),
+  );
+};
+export const setShoppingArrFromLocalStortge = () => {
+  state.shoppingListArr =
+    JSON.parse(localStorage.getItem('shoppingListArr')) || [];
+};
+export const loadRecipeCalories = async () => {
+  const queryTitle = state.recipe.title.split(' ').slice(0, 2).join(' ');
+  const searchData = await AJAX(
+    `${USDA_API_URL}/foods/search?query=${encodeURIComponent(queryTitle)}&api_Key=${USDA_KEY}`,
+  );
+  const foodId = searchData.foods[0].fdcId;
+  const foodData = await AJAX(
+    `${USDA_API_URL}/food/${foodId}?api_Key=${USDA_KEY}`,
+  );
+  const caloriesNutrient = foodData.foodNutrients.find(
+    n =>
+      n.nutrient?.number === '208' ||
+      n.nutrient?.number === '1008' ||
+      n.nutrient?.name?.toLowerCase().includes('energy'),
+  );
+  state.recipe.calories = caloriesNutrient
+    ? Math.round(caloriesNutrient.amount)
+    : 'N/A';
+};
+export const addRecipeToMealPlan = data => {
+  const { day, dayOfWeak } = data;
+  const dataOfRecipe = { ...state.recipe, day, dayOfWeak };
+  state.mealPlanArr.push(dataOfRecipe);
+  localStorage.setItem('mealPlanArr', JSON.stringify(state.mealPlanArr));
+};
+export const removeItemFromArr = id => {
+  state.mealPlanArr = state.mealPlanArr.filter(el => el.id !== id);
+  localStorage.setItem('mealPlanArr', JSON.stringify(state.mealPlanArr));
 };

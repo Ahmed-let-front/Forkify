@@ -6,6 +6,9 @@ class AddRecipe {
     modelRecipe: document.getElementById('recipe-modal'),
     closeModalBtn: document.getElementById('close-modal-btn'),
     uploadForm: document.getElementById('upload-form'),
+    addIngredientBtn: document.getElementById('add-ingredient-btn'),
+    ingredientInputs: document.getElementById('ingredientInputs'),
+    inputCount: 7,
     model: document,
   };
   ListenerOpenModel() {
@@ -15,13 +18,13 @@ class AddRecipe {
     );
   }
   openModel() {
-    this.#elements.overlay.classList.add('overlay-add-recipe');
+    this.#elements.overlay.classList.add('overlay-shape-2');
     this.#elements.overlay.classList.add('is-open');
     this.#elements.modelRecipe.setAttribute('aria-modal', 'true');
     this.#elements.modelRecipe.classList.add('is-open');
   }
   closeModel() {
-    this.#elements.overlay.classList.remove('overlay-add-recipe');
+    this.#elements.overlay.classList.remove('overlay-shape-2');
     this.#elements.overlay.classList.remove('is-open');
     this.#elements.modelRecipe.setAttribute('aria-modal', 'false');
     this.#elements.modelRecipe.classList.remove('is-open');
@@ -31,10 +34,10 @@ class AddRecipe {
       'click',
       this.closeModel.bind(this),
     );
-    this.#elements.overlay.addEventListener(
-      'click',
-      this.closeModel.bind(this),
-    );
+    this.#elements.overlay.addEventListener('click', () => {
+      if (!this.#elements.modelRecipe.classList.contains('is-open')) return;
+      this.closeModel();
+    });
     document.addEventListener('keydown', e => {
       if (
         e.key === 'Escape' &&
@@ -43,6 +46,32 @@ class AddRecipe {
         this.closeModel();
       }
     });
+  }
+  #genrateMarkupBtnIngredient() {
+    const markup = `
+              <div class="flex flex-col">
+                <label
+                  for="ingredient-${this.#elements.inputCount}"
+                  class="block text-base md:text-lg font-semibold text-charcoal-700 mb-1"
+                  >Ingredient ${this.#elements.inputCount}</label
+                >
+                <input
+                  id="ingredient-${this.#elements.inputCount}"
+                  type="text"
+                  name="ingredient-${this.#elements.inputCount}"
+                  placeholder="Format: Quantity,Unit,Description"
+                  class="w-full rounded-xl border border-cream-300 bg-white px-4 py-3 md:py-3.5 text-charcoal-800 placeholder-charcoal-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all text-lg md:text-xl"
+                />
+              </div>
+    `;
+    this.#elements.inputCount++;
+    return markup;
+  }
+  appendMarkupInputBtn() {
+    this.#elements.ingredientInputs.insertAdjacentHTML(
+      'beforeend',
+      this.#genrateMarkupBtnIngredient(),
+    );
   }
   /**
    * @param {(data: Object) => Promise<void>} handler
@@ -54,6 +83,9 @@ class AddRecipe {
       const data = Object.fromEntries(dataArr);
       handler(data);
     });
+  }
+  addHandlerAddInputIngredient(handler) {
+    this.#elements.addIngredientBtn.addEventListener('click', handler);
   }
 }
 export default new AddRecipe();

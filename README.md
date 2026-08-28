@@ -56,24 +56,42 @@ The `Model` acts as the single source of truth (`State`). All incoming API data,
 
 ## ✨ Core Features & Logic Pipelines
 
-### 1. Dynamic Recipe Search (Query Engine)
+### 1. Dynamic Search & Pagination Engine
 
-An asynchronous search pipeline that fetches thousands of recipes via REST API. The results are strictly paginated to ensure optimal memory allocation, rendering only a fixed number of DOM nodes at a time to prevent UI thread blocking.
+An asynchronous search pipeline that fetches thousands of recipes via REST API. Results are strictly paginated, featuring a clear display of the **number of pages between the pagination buttons** to ensure optimal memory allocation, rendering only a fixed number of DOM nodes at a time to prevent UI thread blocking.
 
-### 2. Intelligent Bookmarking System
+### 2. Advanced Search Filtering & Sorting
+
+- **Sorting Engine:** Built-in ability to **sort search results by duration or number of ingredients**.
+- **Robust Ingredient Validation:** Performs strict **ingredient validation in the view, before submitting the form**.
+- **Scalable Ingredient Inputs:** Enhanced recipe ingredient input allowing developers and users to **separate into multiple fields and allow more than 6 ingredients**.
+
+### 3. Intelligent Bookmarking System
 
 Users can bookmark recipes. The active state is managed via pass-by-reference mutations in the state array.
 
 - **UI State Reflection & Persistent Selection:** The DOM instantly reflects active bookmarks using precise `aria-attributes` and CSS class toggling without full re-renders. When a recipe is bookmarked, the UI immediately updates to show an explicitly "selected" (filled) bookmark icon.
 - **LocalStorage Sync:** The bookmark array is safely serialized to JSON and persisted in `localStorage`. This ensures that all saved recipes, along with their active selected icon states on the UI, remain fully intact and available across page reloads and future sessions.
 
-### 3. Custom Recipe Uploads & Search Integration
+### 4. Custom Recipe Uploads & Search Integration
 
 A robust form pipeline allowing users to upload their own recipes.
 
 - Features custom data validation and sanitization.
 - Automatically structures raw string inputs (quantities, units, descriptions) into structured Object arrays before pushing them to the cloud via POST requests.
 - **Seamless Search Integration:** Any custom recipe uploaded by the user is instantly indexed within the application's runtime state. When querying the API for ingredients, the user's personal uploaded recipes will automatically integrate and appear alongside the global search results.
+
+### 5. Shopping List Management
+
+An integrated **shopping list feature with a dedicated button on recipes to add ingredients to a list**, allowing seamless organization of cooking requirements.
+
+### 6. Weekly Meal Planning
+
+A fully fleshed-out **weekly meal planning feature enabling users to assign recipes to the next 7 days and show them on a weekly calendar**.
+
+### 7. Spoonacular Nutritional Data Integration
+
+Fetches and calculates precise **nutrition data on each ingredient from the Spoonacular API (https://spoonacular.com/food-api) and calculates total calories of the recipe**.
 
 ---
 

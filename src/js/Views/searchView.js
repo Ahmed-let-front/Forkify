@@ -8,6 +8,7 @@ class SearchView {
     nextPageNum: document.querySelector('.next-page-num'),
     containerBtnsPagination: document.getElementById('pagination-container'),
     bookmarksPanel: document.getElementById('bookmarks-panel'),
+    sortSelect: document.getElementById('sort-select'),
   };
   get parentEl() {
     return this.#parentEl;
@@ -48,7 +49,8 @@ class SearchView {
     `;
     const welcomeViewContainer = document.getElementById('welcome-view');
     if (welcomeViewContainer) welcomeViewContainer.remove();
-    this.#elements.searchResContianer.insertAdjacentHTML('afterbegin', markup);
+    const firstChild = this.#elements.searchResContianer.children[0];
+    firstChild.insertAdjacentHTML('afterend', markup);
     this.#parentEl = document.getElementById('results-list');
   }
   /**
@@ -61,6 +63,12 @@ class SearchView {
       markup += this.#generateMarkupSearchRes(data);
     });
     this.#parentEl.innerHTML = markup;
+  }
+  showSortSelect() {
+    this.#elements.sortSelect.disabled = false;
+  }
+  hiddenSortSelect() {
+    this.#elements.sortSelect.disabled = true;
   }
   renderPageCount(maxItems) {
     this.#elements.containerBtnsPagination.querySelector(
@@ -113,9 +121,9 @@ class SearchView {
             </div>
         `;
     this.#elements.searchResContianer
-      .querySelectorAll('& > *:not(footer)')
+      .querySelectorAll('& > *:not(footer, #sort-container)')
       .forEach(el => el.remove());
-    this.#elements.searchResContianer.insertAdjacentHTML('afterbegin', markup);
+    this.#elements.sortSelect.insertAdjacentHTML('afterend', markup);
   }
   unFoucsOnSerchInput() {
     document.activeElement.blur();
@@ -170,6 +178,9 @@ class SearchView {
       e.preventDefault();
       handler(this.#getQuery());
     });
+  }
+  addHandlerSortSelect(handler) {
+    this.#elements.sortSelect.addEventListener('change', handler);
   }
 }
 export default new SearchView();

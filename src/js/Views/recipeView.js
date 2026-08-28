@@ -22,14 +22,14 @@ class Recipe {
                 />
                 <figcaption>
                     <h2
-                    class="absolute bottom-6 left-1/2 -translate-x-1/2 md:whitespace-nowrap text-center text-white font-extrabold text-xl md:text-3xl tracking-tight leading-tight uppercase drop-shadow-md bg-gradient-warm px-6 py-2 rounded-2xl z-10"
+                    class="absolute bottom-6 left-1/2 -translate-x-1/2  text-center text-white font-extrabold text-xl md:text-3xl tracking-tight leading-tight uppercase drop-shadow-md bg-gradient-warm px-6 py-2 rounded-2xl z-10"
                     >
                     ${this.#data.title}
                     </h2>
                 </figcaption>
                 </figure>
                 <div
-                class="flex items-center flex-wrap gap-6 justify-around p-8 md:p-10 bg-cream-50/60 backdrop-blur-sm border-b border-cream-200 text-xl md:text-2xl"
+                class="flex items-center flex-wrap gap-6 relative z-20 justify-around p-8 md:p-10 bg-cream-50/60 backdrop-blur-sm border-b border-cream-200 text-xl md:text-2xl"
                 >
                 <div class="flex items-center gap-3 text-charcoal-600 font-bold">
                     <svg class="w-6 h-6 text-primary-500">
@@ -70,6 +70,18 @@ class Recipe {
                     <svg><use href="./icons.svg#icon-bookmark-2"></use></svg>
                     </button>
                 </div>
+                <button
+                  class="flex items-center gap-4 px-6 py-3.5 rounded-2xl border-4 border-dotted border-orange-400 bg-white text-primary-600 font-bold text-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-orange-500/30 hover:border-orange-500 focus:outline-none focus:ring-orange-500 focus:ring-offset-2 cursor-pointer"
+                  id="recipe-meal-plan-btn"
+                  aria-label="Add to weekly meal plan"
+                  title="Add to Meal Plan"
+                >
+                  <svg class="w-6 h-6 fill-orange-500" aria-hidden="true">
+                    <use href="./icons.svg#icon-plus-circle"></use>
+                  </svg>
+                  <span>Add to Meal Plan</span>
+                </button>
+        
                 </div>
 
                 <div class="p-8 md:p-12 bg-cream-100/50 flex flex-col items-center gap-8">
@@ -82,8 +94,20 @@ class Recipe {
                 <ul class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-4xl" id="list-container-ing">
                     ${this.#generateMarkupING()}
                 </ul>
+                <button
+                  type="button"
+                  id="btn-add-to-shopping-list"
+                  class="w-full flex items-center justify-center gap-2.5 py-4 px-6 rounded-xl bg-primary-500 text-white font-bold text-lg md:text-xl shadow-md hover:bg-primary-600 transition-all duration-300 cursor-pointer mt-8"
+                >
+                  <svg class="w-6 h-6 fill-current" aria-hidden="true">
+                    <use href="./icons.svg#icon-plus-circle"></use>
+                  </svg>
+                  <span>Add ingredients to shopping list</span>
+                </button>
                 </div>
-
+                <div class="text-charcoal-600 border-y border-cream-200 p-4 text-center">
+                  <p><strong class="font-bold mr-2 text-4xl ml-8">${this.#data.calories}</strong>kcal</p>
+                </div>
                 <div class="p-8 md:p-12 flex flex-col items-center text-center gap-6">
                 <h3
                     class="text-2xl md:text-3xl font-extrabold uppercase tracking-wider text-charcoal-800 bg-gradient-text bg-clip-text text-transparent"
