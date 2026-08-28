@@ -89,9 +89,9 @@ An integrated **shopping list feature with a dedicated button on recipes to add 
 
 A fully fleshed-out **weekly meal planning feature enabling users to assign recipes to the next 7 days and show them on a weekly calendar**.
 
-### 7. Spoonacular Nutritional Data Integration
+### 7. USDA Nutritional Data Integration
 
-Fetches and calculates precise **nutrition data on each ingredient from the Spoonacular API (https://spoonacular.com/food-api) and calculates total calories of the recipe**.
+Fetches and calculates precise **nutrition data on each ingredient from the USDA API (https://fdc.nal.usda.gov/) and calculates total calories of the recipe**.
 
 ---
 
