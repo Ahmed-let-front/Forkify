@@ -112,7 +112,10 @@ class MealPlan {
     el.remove();
   }
   renderRecipeInMealPlanFromLocalStortge(data) {
-    if (!data.length) return;
+    if (!data.length) {
+      console.log("ssssss")
+      return;
+    }
     const markup = data.map(el => this.#gemerateMarkup(el)).join('');
     this.#elements.mealPlanGrid.innerHTML = markup;
     this.setabledAbilityBtnsSelect(data);
@@ -184,7 +187,6 @@ class MealPlan {
       const targetEl = e.target;
       if (!targetEl.closest('#delete-item-meal-plan')) return;
       const parentEl = targetEl.closest('#item-recipe-meal-plan');
-      console.log(parentEl);
       handler(parentEl);
     });
   }

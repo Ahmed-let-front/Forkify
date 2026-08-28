@@ -41,7 +41,6 @@ class ShoppingList {
     });
   }
   #generateMarkup(data) {
-    console.log(data);
     const lastEl = data.at(-1);
     const markup = `
     <div class="mb-6 p-4 sm:p-6 rounded-2xl bg-cream-50/50 border border-cream-200" data-id="${lastEl.id}" id="item-list">
