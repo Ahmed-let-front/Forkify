@@ -112,10 +112,9 @@ class MealPlan {
     el.remove();
   }
   renderRecipeInMealPlanFromLocalStortge(data) {
-    if (!data.length) {
-      console.log("ssssss")
-      return;
-    }
+    if (!data.length) return;
+    const noMealMessage = document.getElementById('no-meal-message');
+    if (noMealMessage) noMealMessage.remove();
     const markup = data.map(el => this.#gemerateMarkup(el)).join('');
     this.#elements.mealPlanGrid.innerHTML = markup;
     this.setabledAbilityBtnsSelect(data);
