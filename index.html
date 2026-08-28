@@ -13,8 +13,8 @@
     />
     <link rel="shortcut icon" type="image/svg+xml" href="./favicon.svg" />
     <title>Forkify — Discover & Cook Amazing Recipes</title>
-    <script type="module" crossorigin src="/Forkify/assets/index-C6gySIlq.js"></script>
-    <link rel="stylesheet" crossorigin href="/Forkify/assets/index-vEZzZGSj.css">
+    <script type="module" crossorigin src="/assets/index-OBCROjmJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CIPV1fZx.css">
   </head>
   <body
     class="min-h-screen font-sans antialiased text-charcoal-700 bg-gradient-cream"
@@ -28,7 +28,7 @@
       class="max-w-[160rem] mx-auto p-6 md:p-10 grid gap-8 grid-cols-1 lg:grid-cols-[1fr_1.6fr]"
     >
       <header
-        class="sticky top-0 z-10 flex items-center flex-col gap-6 md:flex-row md:items-center md:justify-between lg:col-span-2 px-4 py-5 md:px-8 md:py-6 rounded-b-3xl bg-gradient-glass backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_10px_40px_-10px_rgba(249,115,22,0.15)] animate-slide-down"
+        class="sticky top-0 z-10 flex items-center flex-col gap-6 md:flex-row md:items-center md:justify-center lg:col-span-2 px-4 py-5 md:px-8 md:py-6 rounded-b-3xl bg-gradient-glass backdrop-blur-[20px] backdrop-saturate-[180%] border border-white/60 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_10px_40px_-10px_rgba(249,115,22,0.15)] animate-slide-down flex-wrap xl:justify-between"
       >
         <a
           href="#"
@@ -48,7 +48,7 @@
           >
         </a>
         <form
-          class="flex-1 flex items-stretch max-w-2xl mx-auto w-full bg-white/70 rounded-full overflow-hidden border-2 border-transparent transition-transform duration-300 shadow-[0_4px_16px_-4px_rgba(249,115,22,0.15)] focus-within:border-[#fb923c] focus-within:shadow-[0_8px_24px_-4px_rgba(249,115,22,0.3)] focus-within:-translate-y-px"
+          class="flex items-stretch max-w-2xl mx-auto w-full bg-white/70 rounded-full overflow-hidden border-2 border-transparent transition-transform duration-300 shadow-[0_4px_16px_-4px_rgba(249,115,22,0.15)] focus-within:border-[#fb923c] focus-within:shadow-[0_8px_24px_-4px_rgba(249,115,22,0.3)] focus-within:-translate-y-px"
           role="search"
           id="search-form"
         >
@@ -71,44 +71,69 @@
             <span class="text-[clamp(0.8rem,2vw,1.4rem)]">Search</span>
           </button>
         </form>
-        <div class="flex items-center gap-3 list-none p-0 m-0">
-          <div class="relative">
-            <button class="nav__btn" id="open-modal-btn">
-              <svg class="nav__icon" aria-hidden="true">
-                <use href="/Forkify/icons.svg#icon-edit-2" />
-              </svg>
-              <span>Add recipe</span>
-            </button>
-          </div>
-          <div class="relative">
-            <button class="nav__btn" id="toggle-bookmarks-btn">
-              <svg class="nav__icon" aria-hidden="true">
-                <use href="/Forkify/icons.svg#icon-bookmark-2" />
-              </svg>
-              <span>Bookmarks</span>
-              <output class="nav__badge" id="bookmark-count">0</output>
-            </button>
-            <ul class="bookmarks max-h-96 overflow-y-auto" id="bookmarks-panel">
-              <li class="p-6 text-center flex flex-col items-center gap-3">
-                <div>
-                  <svg class="w-12 h-12 text-primary-400" aria-hidden="true">
-                    <use href="/Forkify/icons.svg#icon-smile-2" />
-                  </svg>
-                </div>
-                <p
-                  class="text-charcoal-500 m-0 text-[clamp(1.2rem,1.1vw,1.4rem)]"
-                >
-                  No bookmarks yet. Find a nice recipe and bookmark it :)
-                </p>
-              </li>
-            </ul>
-          </div>
+        <div
+          class="flex items-center gap-3 list-none p-0 m-0 flex-wrap justify-center"
+        >
+          <button class="nav__btn" id="open-modal-btn">
+            <svg class="nav__icon" aria-hidden="true">
+              <use href="/icons.svg#icon-edit-2" />
+            </svg>
+            <span>Add recipe</span>
+          </button>
+          <button type="button" class="nav__btn" id="shopping-list-btn">
+            <svg class="nav__icon" aria-hidden="true">
+              <use href="icons.svg#icon-bookmark"></use>
+            </svg>
+            <span>Shopping List</span>
+            <output class="nav__badge" id="count-recipes-shopping-list"
+              >0</output
+            >
+          </button>
+          <button type="button" class="nav__btn" id="meal-plan-nav-btn">
+            <svg class="nav__icon" aria-hidden="true">
+              <use href="icons.svg#icon-bookmark-2"></use>
+            </svg>
+            <span>Meal Plan</span>
+            <output class="nav__badge" id="meal-plan-count">0</output>
+          </button>
+          <button class="nav__btn" id="toggle-bookmarks-btn">
+            <svg class="nav__icon" aria-hidden="true">
+              <use href="/icons.svg#icon-bookmark-2" />
+            </svg>
+            <span>Bookmarks</span>
+            <output class="nav__badge" id="bookmark-count">0</output>
+          </button>
+          <ul class="bookmarks max-h-96 overflow-y-auto" id="bookmarks-panel">
+            <li class="p-6 text-center flex flex-col items-center gap-3">
+              <div>
+                <svg class="w-12 h-12 text-primary-400" aria-hidden="true">
+                  <use href="/icons.svg#icon-smile-2" />
+                </svg>
+              </div>
+              <p
+                class="text-charcoal-500 m-0 text-[clamp(1.2rem,1.1vw,1.4rem)]"
+              >
+                No bookmarks yet. Find a nice recipe and bookmark it :)
+              </p>
+            </li>
+          </ul>
         </div>
       </header>
       <div
         class="flex flex-col justify-between gap-6 w-full"
         id="search-res-container"
       >
+        <div class="relative shadow-2xl" id="sort-container">
+          <select
+            id="sort-select"
+            class="nav__btn appearance-none cursor-pointer pr-12 pl-6 py-3.5 rounded-full bg-white/80 backdrop-blur-md border border-cream-200 text-charcoal-700 font-semibold text-xl shadow-[0_10px_30px_-5px_rgba(249,115,22,0.15)] focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all w-full disabled:blur-[3px] disabled:cursor-not-allowed"
+            disabled
+          >
+            <option value="" disabled selected>Sort By...</option>
+            <option value="duration">Cooking Time (Duration)</option>
+            <option value="ingredients">Number of Ingredients</option>
+          </select>
+        </div>
         <div
           class="flex flex-col animate-slide-up items-center justify-center text-center p-8 sm:p-12 md:p-16 bg-white rounded-3xl shadow-2xl shadow-black/30 text-xl gap-6 w-full"
           id="welcome-view"
@@ -163,7 +188,7 @@
               id="prev-page-btn"
             >
               <svg class="w-5 h-5" aria-hidden="true">
-                <use href="/Forkify/icons.svg#icon-arrow-left-2" />
+                <use href="/icons.svg#icon-arrow-left-2" />
               </svg>
               <span> Page <span class="prev-page-num"></span></span>
             </button>
@@ -178,7 +203,7 @@
             >
               <span>Page <span class="next-page-num"></span></span>
               <svg class="w-5 h-5" aria-hidden="true">
-                <use href="/Forkify/icons.svg#icon-arrow-right-2" />
+                <use href="/icons.svg#icon-arrow-right-2" />
               </svg>
             </button>
           </div>
@@ -214,7 +239,7 @@
             class="w-20 h-20 rounded-full flex items-center justify-center bg-gradient-warm shadow-[0_12px_30px_-8px_rgba(249,115,22,0.5)] animate-float"
           >
             <svg class="w-10 h-10 text-white" aria-hidden="true">
-              <use href="/Forkify/icons.svg#icon-smile-2" />
+              <use href="/icons.svg#icon-smile-2" />
             </svg>
           </div>
           <p
@@ -227,7 +252,7 @@
     </main>
     <div class="overlay" id="modal-overlay"></div>
     <div
-      class="popup fixed top-6 right-6 z-70 text-[1.5rem] flex items-center gap-3.5 p-6 rounded-2xl bg-gradient-glass backdrop-blur-xl border border-white shadow-[0_10px_30px_-5px_rgba(249,115,22,0.2)] opacity-0 translate-x-[50rem] pointer-events-none transition-all duration-300 [&.is-open]:translate-x-0 [&.is-open]:opacity-100 [&.is-open]:pointer-events-auto drop-shadow-2xl shadow-black/50"
+      class="popup fixed top-6 right-6 w-[27rem] sm:w-fit z-70 text-[1.2rem] sm:text-[1.5rem] flex items-center gap-7 p-4 sm:p-6 rounded-2xl bg-gradient-glass backdrop-blur-xl border border-white shadow-[0_10px_30px_-5px_rgba(249,115,22,0.2)] opacity-0 translate-x-[50rem] pointer-events-none transition-all duration-300 [&.is-open]:translate-x-0 [&.is-open]:opacity-100 [&.is-open]:pointer-events-auto drop-shadow-2xl shadow-black/50"
       id="custom-popup"
       role="alert"
     >
@@ -278,7 +303,7 @@
                 class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-100 text-primary-600"
               >
                 <svg aria-hidden="true" class="h-5 w-5 fill-current">
-                  <use href="/Forkify/icons.svg#icon-edit-2" />
+                  <use href="/icons.svg#icon-edit-2" />
                 </svg>
               </span>
               Recipe Data
@@ -294,7 +319,7 @@
                   class="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-100 text-primary-600"
                 >
                   <svg aria-hidden="true" class="h-4 w-4 fill-current">
-                    <use href="/Forkify/icons.svg#icon-edit-2" />
+                    <use href="/icons.svg#icon-edit-2" />
                   </svg>
                 </span>
                 Recipe Information
@@ -401,7 +426,7 @@
               </div>
             </div>
 
-            <div class="flex flex-col flex-1 gap-4">
+            <div class="flex flex-col flex-1 gap-4" id="ingredientInputs">
               <h3
                 class="flex items-center gap-3 text-xl md:text-2xl font-bold text-charcoal-700 mb-2"
               >
@@ -409,7 +434,7 @@
                   class="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-100 text-primary-600"
                 >
                   <svg aria-hidden="true" class="h-4 w-4 fill-current">
-                    <use href="/Forkify/icons.svg#icon-bookmark-2" />
+                    <use href="/icons.svg#icon-bookmark-2" />
                   </svg>
                 </span>
                 Ingredients
@@ -508,19 +533,203 @@
             </div>
           </div>
 
-          <div class="flex items-center justify-end pt-4">
+          <div class="flex items-center justify-between pt-4 gap-4">
+            <button
+              type="button"
+              id="add-ingredient-btn"
+              class="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl border-2 border-dashed border-primary-300 bg-primary-50/50 text-primary-600 font-bold text-sm md:text-xl transition-all duration-300 hover:bg-primary-100 hover:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-500/20 cursor-pointer"
+            >
+              <svg class="w-6 h-6 fill-current" aria-hidden="true">
+                <use href="/icons.svg#icon-plus-circle" />
+              </svg>
+              <span>Add Ingredient</span>
+            </button>
             <button
               type="submit"
               id="upload-btn"
-              class="flex items-center gap-2 cursor-pointer rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 px-8 py-4 text-lg md:text-xl font-bold text-white shadow-lg shadow-primary-500/25 transition-all duration-300 hover:from-primary-600 hover:to-accent-600 hover:shadow-primary-600/40 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+              class="flex items-center gap-2 cursor-pointer rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 px-4 py-4 text-sm md:text-xl font-bold text-white shadow-lg shadow-primary-500/25 transition-all duration-300 hover:from-primary-600 hover:to-accent-600 hover:shadow-primary-600/40 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
             >
               <svg aria-hidden="true" class="h-6 w-6 fill-current">
-                <use href="/Forkify/icons.svg#icon-upload" />
+                <use href="/icons.svg#icon-upload" />
               </svg>
               <span>Upload Recipe</span>
             </button>
           </div>
         </form>
+      </div>
+    </div>
+    <div
+      class="max-w-xl mx-auto p-8 bg-white rounded-2xl shadow-lg border border-cream-200 opacity-0 pointer-events-none fixed -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 z-50 [&.is-open]:opacity-100 [&.is-open]:pointer-events-auto transition-all duration-500 h-[85%] sm:h-[75%] overflow-auto w-[80%]"
+      id="shopping-list-container"
+      role="dialog"
+      aria-modal="false"
+      aria-labelledby="shopping-list-header"
+    >
+      <button
+        type="button"
+        class="w-10 h-10 ml-auto mb-4 sm:mb-5 rounded-xl bg-white border border-cream-200 text-charcoal-400 hover:text-red-500 hover:border-red-300 hover:bg-red-50 transition-all flex items-center justify-center cursor-pointer shadow-sm z-10 text-3xl"
+        title="Remove recipe container"
+        id="close-btn-shopping-list"
+      >
+        &times;
+      </button>
+      <div
+        class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8 pb-5 sm:pb-6 border-b border-cream-200"
+      >
+        <div class="flex items-center gap-4">
+          <div class="p-3.5 bg-primary-50 text-primary-500 rounded-xl shrink-0">
+            <svg class="w-8 h-8 fill-current" aria-hidden="true">
+              <use href="icons.svg#icon-bookmark"></use>
+            </svg>
+          </div>
+          <div>
+            <h2
+              id="shopping-list-header"
+              class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-charcoal-800"
+            >
+              Shopping List
+            </h2>
+            <p class="text-sm sm:text-base text-charcoal-500 mt-1">
+              Ingredients grouped by recipe
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="items-container-shopping">
+        <div id="no-shopping-message">
+          <div>
+            <svg
+              class="w-12 h-12 text-primary-400 mx-auto mb-6"
+              aria-hidden="true"
+            >
+              <use href="/icons.svg#icon-smile-2" />
+            </svg>
+          </div>
+          <p class="text-charcoal-500 m-0 text-2xl">
+            No shopping list items yet. Add ingredients from your favorite
+            recipes :)
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="fixed top-1/2 left-1/2 -translate-1/2 opacity-0 z-60 flex items-center justify-center w-fit pointer-events-none [&.is-open]:pointer-events-auto [&.is-open]:opacity-100 duration-500 transition-[opacity_pointer-events]"
+      id="meal-plan-modal"
+      role="dialog"
+      aria-modal="false"
+      aria-labelledby="meal-plan-title"
+    >
+      <div
+        class="relative w-[27rem] sm:w-4xl md:w-5xl max-h-[85vh] overflow-y-auto rounded-3xl bg-cream-50 p-8 md:p-10 shadow-2xl border border-cream-200"
+      >
+        <button
+          class="absolute top-8 right-8 z-10 flex size-10 text-2xl cursor-pointer items-center justify-center rounded-full bg-cream-100 text-charcoal-600 transition-all duration-300 hover:bg-primary-500 hover:text-white"
+          id="close-meal-plan-btn"
+          aria-label="Close meal planner"
+        >
+          &times;
+        </button>
+        <div
+          class="flex items-center gap-4 mb-8 pb-6 border-b border-cream-200"
+        >
+          <div class="p-3.5 bg-primary-50 text-primary-500 rounded-xl shrink-0">
+            <svg class="w-8 h-8 fill-current" aria-hidden="true">
+              <use href="/icons.svg#icon-bookmark-2"></use>
+            </svg>
+          </div>
+          <div>
+            <h2
+              id="meal-plan-title"
+              class="text-xl sm:text-3xl md:text-4xl font-extrabold text-charcoal-800 mt-8"
+            >
+              Weekly Meal Planner
+            </h2>
+            <p class="text-lg text-charcoal-500 mt-1">
+              Organize your recipes for the next 7 days
+            </p>
+          </div>
+        </div>
+        <div
+          class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-8"
+          id="meal-plan-grid"
+        >
+        </div>
+      </div>
+    </div>
+    <div
+      class="fixed z-70 top-1/2 left-1/2 -translate-1/2 opacity-0 flex items-center justify-center w-fit pointer-events-none [&.is-open]:pointer-events-auto [&.is-open]:opacity-100 duration-500 transition-[opacity_pointer-events]"
+      id="select-day-modal"
+      role="dialog"
+      aria-modal="false"
+      aria-labelledby="select-day-title"
+    >
+      <div
+        class="relative w-[22rem] sm:w-[28rem] rounded-3xl bg-cream-50 p-6 md:p-8 shadow-2xl border border-cream-200"
+      >
+        <button
+          class="absolute top-4 right-4 z-10 flex size-9 text-xl cursor-pointer items-center justify-center rounded-full bg-cream-100 text-charcoal-600 transition-all duration-300 hover:bg-primary-500 hover:text-white"
+          id="close-select-day-btn"
+          aria-label="Close day selector"
+        >
+          &times;
+        </button>
+
+        <div class="mb-6 pb-4 border-b border-cream-200">
+          <h2
+            id="select-day-title"
+            class="text-xl sm:text-2xl font-extrabold text-charcoal-800"
+          >
+            Choose a Day
+          </h2>
+          <p class="text-lg text-charcoal-500 mt-1">
+            Select which day to add this recipe to your meal plan.
+          </p>
+        </div>
+
+        <ul class="flex flex-col gap-2.5" id="days-list-container">
+          <li data-index="1" id="day-item">
+            <button class="btn-day-select-day" data-day="monday">
+              <span class="day-seleect-of-weak">Monday</span>
+              <span class="day-select">Day 1</span>
+            </button>
+          </li>
+          <li data-index="2" id="day-item">
+            <button class="btn-day-select-day" data-day="tuesday">
+              <span class="day-seleect-of-weak">Tuesday</span>
+              <span class="day-select">Day 2</span>
+            </button>
+          </li>
+          <li data-index="3" id="day-item">
+            <button class="btn-day-select-day" data-day="wednesday">
+              <span class="day-seleect-of-weak">Wednesday</span>
+              <span class="day-select">Day 3</span>
+            </button>
+          </li>
+          <li data-index="4" id="day-item">
+            <button class="btn-day-select-day" data-day="thursday">
+              <span class="day-seleect-of-weak">Thursday</span>
+              <span class="day-select">Day 4</span>
+            </button>
+          </li>
+          <li data-index="5" id="day-item">
+            <button class="btn-day-select-day" data-day="friday">
+              <span class="day-seleect-of-weak">Friday</span>
+              <span class="day-select">Day 5</span>
+            </button>
+          </li>
+          <li data-index="6" id="day-item">
+            <button class="btn-day-select-day" data-day="saturday">
+              <span class="day-seleect-of-weak">Saturday</span>
+              <span class="day-select">Day 6</span>
+            </button>
+          </li>
+          <li data-index="7" id="day-item">
+            <button class="btn-day-select-day" data-day="sunday">
+              <span class="day-seleect-of-weak">Sunday</span>
+              <span class="day-select">Day 7</span>
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
   </body>
