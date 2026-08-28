@@ -201,8 +201,9 @@ const controlRenderMealLocalStortge = () => {
 };
 const controlDeleteItemMealPlan = parentEl => {
   const id = parentEl.dataset.id;
+  const dayToDelete = parentEl.dataset.dayofweek;
   mealPlan.removeItem(parentEl);
-  mealPlan.setabledAbilityBtnsSelect(model.state.mealPlanArr, "abeld");
+  mealPlan.setAbeldBtnsSelect(dayToDelete);
   model.removeItemFromArr(id);
   if (model.state.mealPlanArr.length === 0) mealPlan.renderToInitView();
   mealPlan.updateCountRecipes(model.state.mealPlanArr.length);
