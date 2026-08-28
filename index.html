@@ -13,7 +13,7 @@
     />
     <link rel="shortcut icon" type="image/svg+xml" href="./favicon.svg" />
     <title>Forkify — Discover & Cook Amazing Recipes</title>
-    <script type="module" crossorigin src="/Forkify/assets/index-OBCROjmJ.js"></script>
+    <script type="module" crossorigin src="/Forkify/assets/index-BuZ01x0h.js"></script>
     <link rel="stylesheet" crossorigin href="/Forkify/assets/index-CIPV1fZx.css">
   </head>
   <body
@@ -253,7 +253,7 @@
     </main>
     <div class="overlay" id="modal-overlay"></div>
     <div
-      class="popup fixed top-6 right-6 w-[27rem] sm:w-fit z-70 text-[1.2rem] sm:text-[1.5rem] flex items-center gap-7 p-4 sm:p-6 rounded-2xl bg-gradient-glass backdrop-blur-xl border border-white shadow-[0_10px_30px_-5px_rgba(249,115,22,0.2)] opacity-0 translate-x-[50rem] pointer-events-none transition-all duration-300 [&.is-open]:translate-x-0 [&.is-open]:opacity-100 [&.is-open]:pointer-events-auto drop-shadow-2xl shadow-black/50"
+      class="popup fixed top-6 right-6  sm:w-fit z-70 text-[1.2rem] sm:text-[1.5rem] flex items-center gap-4 p-4 sm:p-6 rounded-2xl bg-gradient-glass backdrop-blur-xl border border-white shadow-[0_10px_30px_-5px_rgba(249,115,22,0.2)] opacity-0 translate-x-[50rem] pointer-events-none transition-all duration-300 [&.is-open]:translate-x-0 [&.is-open]:opacity-100 [&.is-open]:pointer-events-auto drop-shadow-2xl shadow-black/50"
       id="custom-popup"
       role="alert"
     >
@@ -653,7 +653,15 @@
         <div
           class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-8"
           id="meal-plan-grid"
+        ></div>
+        <div
+          class="flex flex-col items-center justify-center text-center py-6 text-charcoal-400 gap-2"
+          id="no-meal-message"
         >
+          <svg class="w-8 h-8 text-cream-300" aria-hidden="true">
+            <use href="./icons.svg#icon-smile-2"></use>
+          </svg>
+          <p class="text-lg">No meal assigned</p>
         </div>
       </div>
     </div>
