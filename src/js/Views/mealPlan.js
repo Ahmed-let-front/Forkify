@@ -109,8 +109,6 @@ class MealPlan {
     });
   }
   setAbeldBtnsSelect(dayOfWeek) {
-    console.log(dayOfWeek)
-    console.log(this.#elements.daysListContainer);
     this.#elements.daysListContainer.querySelector(
       `[data-day='${dayOfWeek}']`,
     ).disabled = false;
