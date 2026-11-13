@@ -45,6 +45,7 @@ class MealPlan {
             <div
             class="bg-white rounded-2xl p-4 border border-cream-200 shadow-sm flex flex-col justify-between gap-4 w-full"
             data-id="${data.id}"
+            data-dayOfWeek="${data.dayOfWeak}"
             id="item-recipe-meal-plan"
             >
             <div
@@ -60,7 +61,7 @@ class MealPlan {
                 <a
                 href="#${data.id}"
                 id="recipe-item"
-                class="bg-white w-full rounded-2xl p-4 border border-cream-200 shadow-sm flex flex-col gap-8 transition-all duration-300 hover:border-primary-300 hover:shadow-md  group"
+                class="bg-white w-full rounded-2xl p-4 border border-cream-200 shadow-sm flex flex-col gap-8 transition-all duration-300 hover:border-primary-300 hover:shadow-md group"
                 >
                 <img
                     src="${data.image}"
@@ -98,24 +99,27 @@ class MealPlan {
       this.#gemerateMarkup(data),
     );
   }
-  setabledAbilityBtnsSelect(data, flag = 'disabeld') {
+  setabledAbilityBtnsSelect(data) {
     data.forEach(el => {
       this.#elements.daysListContainer
         .querySelectorAll('.btn-day-select-day')
         .forEach(btn => {
-          if (btn.dataset.day === el.dayOfWeak)
-            btn.disabled = flag === 'disabeld' ? true : false;
+          if (btn.dataset.day === el.dayOfWeak) btn.disabled = true;
         });
     });
+  }
+  setAbeldBtnsSelect(dayOfWeek) {
+    this.#elements.daysListContainer.querySelector(
+      `[data-day='${dayOfWeek}']`,
+    ).disabled = false;
   }
   removeItem(el) {
     el.remove();
   }
   renderRecipeInMealPlanFromLocalStortge(data) {
-    if (!data.length) {
-      console.log("ssssss")
-      return;
-    }
+    if (!data.length) return;
+    const noMealMessage = document.getElementById('no-meal-message');
+    if (noMealMessage) noMealMessage.remove();
     const markup = data.map(el => this.#gemerateMarkup(el)).join('');
     this.#elements.mealPlanGrid.innerHTML = markup;
     this.setabledAbilityBtnsSelect(data);
