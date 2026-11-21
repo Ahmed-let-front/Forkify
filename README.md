@@ -111,7 +111,7 @@ The system map follows a continuous, optimized cycle:
 
 ## 🛠️ Tech Stack & Implementation Details
 
-- **Core Language:** JavaScript (ES6+ Strict OOP & MVC Paradigm with JSDoc Type Annotations)
+- **Core Language:** JavaScript (ES6+ Strict OOP & MVC Paradigm)
 - **Data Fetching:** Native `fetch` API with highly structured `async/await` error handling.
 - **Styles & Layout:** **Tailwind CSS v4.x** (Utilizing advanced CSS-first configuration, fluid utility styling, and custom `@layer components`).
 - **Bundler & Build Tool:** Vite (Optimized production asset splitting and rapid HMR).
@@ -142,16 +142,6 @@ This project was built from scratch using a modern frontend workflow. Here is ho
 ### 1. Environment Initialization
 
 The project environment was scaffolded using **Vite** and configured with **Tailwind CSS v4**:
-
-```bash
-# 1. Initialize the project with Vite
-npm create vite@latest . -- --template vanilla
-
-# 2. Install dependencies (Tailwind v4 and GitHub Pages for deployment)
-npm install tailwindcss @tailwindcss/vite gh-pages
-
-# 3. Start the local development server
-npm run dev
 ````
 
 ---
