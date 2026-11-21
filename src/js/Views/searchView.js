@@ -3,7 +3,7 @@ class SearchView {
   #elements = {
     formSearch: document.getElementById('search-form'),
     searchInput: document.getElementById('search-input'),
-    searchResContianer: document.getElementById('search-res-container'),
+    searchResContainer: document.getElementById('search-res-container'),
     prevPageNum: document.querySelector('.prev-page-num'),
     nextPageNum: document.querySelector('.next-page-num'),
     containerBtnsPagination: document.getElementById('pagination-container'),
@@ -49,7 +49,7 @@ class SearchView {
     `;
     const welcomeViewContainer = document.getElementById('welcome-view');
     if (welcomeViewContainer) welcomeViewContainer.remove();
-    const firstChild = this.#elements.searchResContianer.children[0];
+    const firstChild = this.#elements.searchResContainer.children[0];
     firstChild.insertAdjacentHTML('afterend', markup);
     this.#parentEl = document.getElementById('results-list');
   }
@@ -120,12 +120,12 @@ class SearchView {
               </button>
             </div>
         `;
-    this.#elements.searchResContianer
+    this.#elements.searchResContainer
       .querySelectorAll('& > *:not(footer, #sort-container)')
       .forEach(el => el.remove());
     this.#elements.sortSelect.insertAdjacentHTML('afterend', markup);
   }
-  unFoucsOnSerchInput() {
+  unFocusOnSearchInput() {
     document.activeElement.blur();
   }
   /**
@@ -147,7 +147,7 @@ class SearchView {
     this.#elements.prevPageNum.textContent =
       currPage === 1 ? maxItems : currPage - 1;
   }
-  removeAnyListSelcted(parentEl) {
+  removeAnyListSelected(parentEl) {
     if (!parentEl) return;
     parentEl.querySelector('.bg-cream-200')?.classList.remove('bg-cream-200');
   }
@@ -155,8 +155,8 @@ class SearchView {
     this.#parentEl.addEventListener('click', e => {
       const listRes = e.target.closest('.list-result');
       if (listRes?.classList.contains('bg-cream-200')) return;
-      this.removeAnyListSelcted(this.#elements.bookmarksPanel);
-      this.removeAnyListSelcted(e.currentTarget);
+      this.removeAnyListSelected(this.#elements.bookmarksPanel);
+      this.removeAnyListSelected(e.currentTarget);
       if (listRes) listRes.classList.add('bg-cream-200');
     });
   }

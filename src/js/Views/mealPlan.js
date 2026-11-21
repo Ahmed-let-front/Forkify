@@ -40,7 +40,7 @@ class MealPlan {
     this.#elements.overlay.classList.remove('is-open');
     this.#elements.overlay.classList.remove('overlay-shape-2');
   }
-  #gemerateMarkup(data) {
+  #generateMarkup(data) {
     return `
             <div
             class="bg-white rounded-2xl p-4 border border-cream-200 shadow-sm flex flex-col justify-between gap-4 w-full"
@@ -96,7 +96,7 @@ class MealPlan {
     if (noMealMessage) noMealMessage.remove();
     this.#elements.mealPlanGrid.insertAdjacentHTML(
       'beforeend',
-      this.#gemerateMarkup(data),
+      this.#generateMarkup(data),
     );
   }
   setabledAbilityBtnsSelect(data) {
@@ -120,11 +120,11 @@ class MealPlan {
     if (!data.length) return;
     const noMealMessage = document.getElementById('no-meal-message');
     if (noMealMessage) noMealMessage.remove();
-    const markup = data.map(el => this.#gemerateMarkup(el)).join('');
+    const markup = data.map(el => this.#generateMarkup(el)).join('');
     this.#elements.mealPlanGrid.innerHTML = markup;
     this.setabledAbilityBtnsSelect(data);
   }
-  removeAnySelctedRecipe() {
+  removeAnySelectedRecipe() {
     const resultsList = document.getElementById('results-list');
     if (resultsList?.querySelector('.bg-cream-200'))
       resultsList

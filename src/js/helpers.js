@@ -1,8 +1,8 @@
 import { TIMEOUT_SEC } from './config.js';
-const timout = s => {
+const timeout = s => {
   return new Promise((_, reject) => {
     setTimeout(() => {
-      reject(new Error(`Request took long time! Timout after ${s} second`));
+      reject(new Error(`Request took long time! Timeout after ${s} second`));
     }, 1000 * s);
   });
 };
@@ -24,7 +24,7 @@ export const AJAX = async (url, uploadData) => {
         body: JSON.stringify(uploadData),
       })
     : fetch(url);
-  const res = await Promise.race([fetchPro, timout(TIMEOUT_SEC)]);
+  const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
   const data = await res.json();
   const message = `${data.message} (${res.status})`;
   if (!res.ok || data.results === 0) throw new Error(message);

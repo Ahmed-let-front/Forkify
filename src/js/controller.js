@@ -17,7 +17,7 @@ const controlRecipe = async () => {
     recipeView.render(model.state.recipe);
     shoppingList.addHandlerAddIngredient(controlAddShoppingList);
     recipeView.addHandlerUpdateIngBtn(controlServings);
-    bookMark.toogleRenderBookmark(model.state.recipe);
+    bookMark.toggleRenderBookmark(model.state.recipe);
   } catch (err) {
     recipeView.renderInitContent();
     view.showPopup(err.message, '&times;');
@@ -29,13 +29,13 @@ const controlDataFromLocalStrotge = () => {
   if (model.state.bookmarks.bookmarksArr.length === 0) return;
   bookMark.renderRecipesFromLocalStortge(model.state.bookmarks.bookmarksArr);
   const id = window.location.hash.slice(1);
-  bookMark.autoSelctedAfterReload(id);
+  bookMark.autoSelectedAfterReload(id);
 };
 const controlSearchRes = async query => {
   searchView.injectionMarkupListContainer();
-  view.renderSkeltonRes(searchView.parentEl);
+  view.renderSkeletonRes(searchView.parentEl);
   searchView.addHandlerListsResults();
-  searchView.unFoucsOnSerchInput();
+  searchView.unFocusOnSearchInput();
   pagination.addHandlerPangationNext(controlPangationBtnNext);
   pagination.addHandlerPangationPrev(controlPangationBtnPrev);
   searchView.renderResContainerList(await model.loadSearchResData(query));
@@ -44,7 +44,7 @@ const controlSearchRes = async query => {
     model.state.search.maxItmes,
   );
   searchView.renderPageCount(model.state.search.maxItmes);
-  if (model.isDataOfResVaild()) return;
+  if (model.isDataOfResValid()) return;
   view.showContainerBtnsPagination();
 };
 const controlSearchResults = async query => {
@@ -72,7 +72,7 @@ const controlWelcomeView = async e => {
   }
 };
 const controlPangationBtnNext = () => {
-  view.renderSkeltonRes(pagination.parentEl);
+  view.renderSkeletonRes(pagination.parentEl);
   const res = model.paginationLoadResNext();
   searchView.renderResContainerList(res);
   searchView.renderPageNum(
@@ -81,7 +81,7 @@ const controlPangationBtnNext = () => {
   );
 };
 const controlPangationBtnPrev = () => {
-  view.renderSkeltonRes(pagination.parentEl);
+  view.renderSkeletonRes(pagination.parentEl);
   const res = model.paginationLoadResPrev();
   searchView.renderResContainerList(res);
   searchView.renderPageNum(
@@ -100,7 +100,7 @@ const controlRemoveBookMark = () => {
   model.removeBookMark(model.state.recipe);
   bookMark.updateUiBookMarkCount(model.state.bookmarks.countBooMarks);
   bookMark.removeBookmark(model.state.recipe);
-  bookMark.toogleRenderBookmark(model.state.recipe);
+  bookMark.toggleRenderBookmark(model.state.recipe);
 };
 const controlBookMark = () => {
   if (model.state.recipe.bookMarked) {
@@ -110,7 +110,7 @@ const controlBookMark = () => {
   model.addBookMark(model.state.recipe);
   bookMark.renderRecipes(model.state.bookmarks.bookmarksArr);
   bookMark.updateUiBookMarkCount(model.state.bookmarks.countBooMarks);
-  bookMark.toogleRenderBookmark(model.state.recipe);
+  bookMark.toggleRenderBookmark(model.state.recipe);
 };
 const controlAddRecipe = async data => {
   try {
@@ -118,7 +118,7 @@ const controlAddRecipe = async data => {
     view.renderSpinner(recipeView.parentEl);
     await model.uploadRecipe(data);
     recipeView.render(model.state.recipe);
-    bookMark.toogleRenderBookmark(model.state.recipe);
+    bookMark.toggleRenderBookmark(model.state.recipe);
     bookMark.updateUiBookMarkCount(model.state.bookmarks.countBooMarks);
     bookMark.renderRecipes(model.state.bookmarks.bookmarksArr);
     window.history.pushState(
@@ -143,10 +143,10 @@ const controlAddIngredient = () => {
   addRecipe.appendMarkupInputBtn();
   view.showPopup('One has been added.');
 };
-const controlBookMarkBtn = () => bookMark.toogleBookMarkListShape();
-const controlShowShoppingContainer = () => shoppingList.showShoppingContanier();
+const controlBookMarkBtn = () => bookMark.toggleBookMarkListShape();
+const controlShowShoppingContainer = () => shoppingList.showShoppingContainer();
 const controlHiddenShoppingContainer = () =>
-  shoppingList.hiddenShoppingContanier();
+  shoppingList.hiddenShoppingContainer();
 const controlAddShoppingList = () => {
   try {
     model.addShoppingList();
@@ -172,7 +172,7 @@ const controlRemoveShoppingList = id => {
   view.showPopup('Successfully removed.');
   if (model.state.shoppingListArr.length === 0) shoppingList.renderToInitView();
 };
-const conrolShowMealPlanModel = () => {
+const controlShowMealPlanModel = () => {
   mealPlan.showModel();
 };
 const controlHiddenMealPlanModel = () => mealPlan.hiddenModel();
@@ -209,7 +209,7 @@ const controlDeleteItemMealPlan = parentEl => {
   mealPlan.updateCountRecipes(model.state.mealPlanArr.length);
   view.showPopup('Successfully removed.');
 };
-const controlClickInRecipeInList = () => mealPlan.removeAnySelctedRecipe();
+const controlClickInRecipeInList = () => mealPlan.removeAnySelectedRecipe();
 const init = () => {
   recipeView.addHandlerRender(controlRecipe);
   searchView.addHandlerRenderSearchRes(controlSearchResults);
@@ -221,7 +221,7 @@ const init = () => {
   shoppingList.addHandlerShoppingBtnShow(controlShowShoppingContainer);
   shoppingList.addHandlerShoppingBtnClose(controlHiddenShoppingContainer);
   shoppingList.addHandlerRemoveIngredient(controlRemoveShoppingList);
-  mealPlan.addHandlerShowBtnModel(conrolShowMealPlanModel);
+  mealPlan.addHandlerShowBtnModel(controlShowMealPlanModel);
   mealPlan.addHandlerHiddenBtnModel(controlHiddenMealPlanModel);
   mealPlan.addHandlerBtnAdd(controlShowMealPlanSelect);
   mealPlan.addHandlerHiddenBtnModelSelect(controlHiddenMealPlanSelect);

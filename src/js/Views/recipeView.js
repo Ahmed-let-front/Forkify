@@ -43,7 +43,7 @@ class Recipe {
                     <svg class="w-6 h-6 text-primary-500">
                     <use href="./icons.svg#icon-users"></use>
                     </svg>
-                    <output class="ser-count">${this.#data.servings}</output>
+                    <output class="set-count">${this.#data.servings}</output>
                     <span class="font-normal text-charcoal-400">servings</span>
 
                     <div class="flex items-center gap-1 ml-2" id="container-update-btn-ing">
@@ -203,7 +203,7 @@ class Recipe {
     );
     this.#parentEl.querySelector('#list-container-ing').innerHTML =
       newIngMarkup;
-    this.#parentEl.querySelector('.ser-count').textContent = updateTo;
+    this.#parentEl.querySelector('.set-count').textContent = updateTo;
     increaseServingsBtn.dataset.updateTo = updateTo + 1;
     dcreaseServingsBtn.dataset.updateTo = updateTo - 1;
   }

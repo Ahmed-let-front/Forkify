@@ -6,7 +6,7 @@ class View {
     closeBtn: document.getElementById('close-popup-btn'),
     containerBtnsPagination: document.getElementById('pagination-container'),
   };
-  renderSkeltonRes(parentEl) {
+  renderSkeletonRes(parentEl) {
     const markup = `
       <li class="preview preview--stagger-1">
         <figure class="preview__fig">

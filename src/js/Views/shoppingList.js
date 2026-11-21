@@ -13,13 +13,13 @@ class ShoppingList {
   constructor() {
     this.handlerCloseModel();
   }
-  showShoppingContanier() {
+  showShoppingContainer() {
     this.#elements.ShoppingContainer.classList.add('is-open');
     this.#elements.overlay.classList.add('is-open');
     this.#elements.overlay.classList.add('overlay-shape-2');
     this.#elements.ShoppingContainer.setAttribute('aria-modal', true);
   }
-  hiddenShoppingContanier() {
+  hiddenShoppingContainer() {
     this.#elements.ShoppingContainer.classList.remove('is-open');
     this.#elements.overlay.classList.remove('is-open');
     this.#elements.overlay.classList.remove('overlay-shape-2');
@@ -29,14 +29,14 @@ class ShoppingList {
     this.#elements.overlay.addEventListener('click', () => {
       if (!this.#elements.ShoppingContainer.classList.contains('is-open'))
         return;
-      this.hiddenShoppingContanier();
+      this.hiddenShoppingContainer();
     });
     document.addEventListener('keydown', e => {
       if (
         e.key === 'Escape' &&
         this.#elements.ShoppingContainer.classList.contains('is-open')
       ) {
-        this.hiddenShoppingContanier();
+        this.hiddenShoppingContainer();
       }
     });
   }

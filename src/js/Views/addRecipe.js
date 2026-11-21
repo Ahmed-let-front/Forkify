@@ -47,7 +47,7 @@ class AddRecipe {
       }
     });
   }
-  #genrateMarkupBtnIngredient() {
+  #generateMarkupBtnIngredient() {
     const markup = `
               <div class="flex flex-col">
                 <label
@@ -70,7 +70,7 @@ class AddRecipe {
   appendMarkupInputBtn() {
     this.#elements.ingredientInputs.insertAdjacentHTML(
       'beforeend',
-      this.#genrateMarkupBtnIngredient(),
+      this.#generateMarkupBtnIngredient(),
     );
   }
   /**

@@ -18,7 +18,7 @@ class BookMark {
   /**
    * @param {import('../model.js').Recipe} recipe
    */
-  toogleRenderBookmark(recipe) {
+  toggleRenderBookmark(recipe) {
     if (!recipe.bookMarked) {
       const btn = this.#parentEl.querySelector('.btn--bookmark');
       const useEl = btn.querySelector('use');
@@ -94,7 +94,7 @@ class BookMark {
     `;
     this.#elements.bookMarkList.innerHTML = markup;
   }
-  removeAnyListSelcted(parentEl) {
+  removeAnyListSelected(parentEl) {
     if (!parentEl) return;
     parentEl.querySelector('.bg-cream-200')?.classList.remove('bg-cream-200');
   }
@@ -116,8 +116,8 @@ class BookMark {
       const listRes = e.target.closest('.preview-list');
       if (listRes?.classList.contains('bg-cream-200')) return;
       const containerSearchRes = document.getElementById('results-list');
-      this.removeAnyListSelcted(containerSearchRes);
-      this.removeAnyListSelcted(e.currentTarget);
+      this.removeAnyListSelected(containerSearchRes);
+      this.removeAnyListSelected(e.currentTarget);
       listRes.classList.add('bg-cream-200');
     });
   }
@@ -126,7 +126,7 @@ class BookMark {
    * after a page reload restores the list.
    * @param {string} id
    */
-  autoSelctedAfterReload(id) {
+  autoSelectedAfterReload(id) {
     const allPreviewList =
       this.#elements.bookMarkList.querySelectorAll('.preview-list');
     allPreviewList.forEach(el => {
@@ -135,7 +135,7 @@ class BookMark {
       if (idEl === id) el.classList.add('bg-cream-200');
     });
   }
-  toogleBookMarkListShape() {
+  toggleBookMarkListShape() {
     this.#elements.bookMarkList.classList.toggle('is-open');
     this.#elements.overlay.classList.toggle('is-open');
   }

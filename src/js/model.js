@@ -143,7 +143,7 @@ export const loadSearchResData = async query => {
   state.search.currPage = 1;
   return getPageData();
 };
-export const isDataOfResVaild = () =>
+export const isDataOfResValid = () =>
   state.search.results.length <= RES_PER_PAGE;
 export const paginationLoadResNext = () => {
   if (state.search.currPage === state.search.maxItmes)
