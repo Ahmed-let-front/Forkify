@@ -45,13 +45,13 @@ class MealPlan {
             <div
             class="bg-white rounded-2xl p-4 border border-cream-200 shadow-sm flex flex-col justify-between gap-4 w-full"
             data-id="${data.id}"
-            data-dayOfWeek="${data.dayOfWeak}"
+            data-dayOfWeek="${data.dayOfWeek}"
             id="item-recipe-meal-plan"
             >
             <div
                 class="flex items-center flex-wrap gap-2 justify-between border-b border-cream-100 pb-2"
             >
-                <h3 class="font-bold text-primary-600 text-lg">${data.dayOfWeak}</h3>
+                <h3 class="font-bold text-primary-600 text-lg">${data.dayOfWeek}</h3>
                 <span
                 class="text-sm font-semibold px-2 py-0.5 rounded-full bg-primary-50 text-primary-500"
                 >Day ${data.day}</span
@@ -91,7 +91,7 @@ class MealPlan {
             </div>
     `;
   }
-  renderReecipeInMealPlan(data) {
+  renderRecipeInMealPlan(data) {
     const noMealMessage = document.getElementById('no-meal-message');
     if (noMealMessage) noMealMessage.remove();
     this.#elements.mealPlanGrid.insertAdjacentHTML(
@@ -104,11 +104,11 @@ class MealPlan {
       this.#elements.daysListContainer
         .querySelectorAll('.btn-day-select-day')
         .forEach(btn => {
-          if (btn.dataset.day === el.dayOfWeak) btn.disabled = true;
+          if (btn.dataset.day === el.dayOfWeek) btn.disabled = true;
         });
     });
   }
-  setAbeldBtnsSelect(dayOfWeek) {
+  setEnabledBtnsSelect(dayOfWeek) {
     this.#elements.daysListContainer.querySelector(
       `[data-day='${dayOfWeek}']`,
     ).disabled = false;
@@ -116,7 +116,7 @@ class MealPlan {
   removeItem(el) {
     el.remove();
   }
-  renderRecipeInMealPlanFromLocalStortge(data) {
+  renderRecipeInMealPlanFromLocalStorage(data) {
     if (!data.length) return;
     const noMealMessage = document.getElementById('no-meal-message');
     if (noMealMessage) noMealMessage.remove();
@@ -171,8 +171,8 @@ class MealPlan {
       const item = targetEl.closest('#day-item');
       const day = item.dataset.index;
       const btn = item.querySelector('.btn-day-select-day');
-      const dayOfWeak = item.querySelector('.btn-day-select-day').dataset.day;
-      const data = { day, dayOfWeak, btn };
+      const dayOfWeek = item.querySelector('.btn-day-select-day').dataset.day;
+      const data = { day, dayOfWeek, btn };
       handler(data);
     });
   }
@@ -225,3 +225,8 @@ class MealPlan {
   }
 }
 export default new MealPlan();
+
+
+
+
+

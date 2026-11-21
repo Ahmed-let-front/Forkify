@@ -43,12 +43,12 @@ import { AJAX } from './helpers.js';
  * @property {string} query
  * @property {RecipeSummary[]} results
  * @property {number} currPage
- * @property {() => number} maxItmes
+ * @property {() => number} maxItems
  */
 
 /**
  * @typedef {Object} BookmarksState
- * @property {number} countBooMarks
+ * @property {number} countBookmarks
  * @property {Recipe[]} bookmarksArr
  */
 
@@ -66,12 +66,12 @@ export const state = {
     query: '',
     results: [],
     currPage: 1,
-    get maxItmes() {
+    get maxItems() {
       return Math.ceil(this.results.length / RES_PER_PAGE);
     },
   },
   bookmarks: {
-    countBooMarks: 0,
+    countBookmarks: 0,
     bookmarksArr: [],
   },
   shoppingListArr: [],
@@ -110,13 +110,13 @@ export const loadRecipe = async id => {
   else state.recipe.bookMarked = false;
 };
 /**
- * Converts a decimal fraction into a simplified "numerator/denominator" string.
+ * converts a decimal fraction into a simplified "numerator/denominator" string.
  * Whole numbers pass through unchanged; the GCD reduction keeps the result
  * human-readable (e.g. 0.5 → "1/2", not "5/10").
  * @param {number} decimal
  * @returns {string}
  */
-export const converDecimalToFraction = decimal => {
+export const convertDecimalToFraction = decimal => {
   if (decimal >= 1) return decimal;
   const denominator = DECIMAL_BASE ** decimal.toString().split('.')[1].length;
   const numerator = decimal * denominator;
@@ -146,13 +146,13 @@ export const loadSearchResData = async query => {
 export const isDataOfResValid = () =>
   state.search.results.length <= RES_PER_PAGE;
 export const paginationLoadResNext = () => {
-  if (state.search.currPage === state.search.maxItmes)
+  if (state.search.currPage === state.search.maxItems)
     state.search.currPage = 0;
   return getPageData(++state.search.currPage);
 };
 export const paginationLoadResPrev = () => {
   if (state.search.currPage === 1)
-    state.search.currPage = state.search.maxItmes + 1;
+    state.search.currPage = state.search.maxItems + 1;
   return getPageData(--state.search.currPage);
 };
 /**
@@ -168,7 +168,7 @@ export const updateServings = function (newServings) {
   state.recipe.servings = newServings;
 };
 export const updateCountBookMark = () => {
-  state.bookmarks.countBooMarks = state.bookmarks.bookmarksArr.length;
+  state.bookmarks.countBookmarks = state.bookmarks.bookmarksArr.length;
 };
 /**
  * Persists the bookmark list to localStorage after every change so a page
@@ -179,11 +179,11 @@ export const addBookMark = recipe => {
   state.bookmarks.bookmarksArr.push(recipe);
   if (recipe.id === state.recipe.id) state.recipe.bookMarked = true;
   updateCountBookMark();
-  const dataForLocalStortge = {
+  const dataForLocalStorage = {
     bookMarksArr: state.bookmarks.bookmarksArr,
-    countBookMarks: state.bookmarks.countBooMarks,
+    countBookMarks: state.bookmarks.countBookmarks,
   };
-  localStorage.setItem('bookMarkState', JSON.stringify(dataForLocalStortge));
+  localStorage.setItem('bookMarkState', JSON.stringify(dataForLocalStorage));
 };
 /**
  * @param {Recipe} recipe
@@ -195,22 +195,22 @@ export const removeBookMark = recipe => {
     rec => rec.id !== recipe.id,
   );
   updateCountBookMark();
-  const dataForLocalStortge = {
+  const dataForLocalStorage = {
     bookMarksArr: state.bookmarks.bookmarksArr,
-    countBookMarks: state.bookmarks.countBooMarks,
+    countBookMarks: state.bookmarks.countBookmarks,
   };
-  localStorage.setItem('bookMarkState', JSON.stringify(dataForLocalStortge));
+  localStorage.setItem('bookMarkState', JSON.stringify(dataForLocalStorage));
 };
 /**
  * Restores persisted bookmarks from localStorage on startup; safely no-ops
  * when nothing was stored yet.
  */
-export const getDataFromLocalStrotgeBookMark = () => {
+export const getDataFromLocalStorageBookMark = () => {
   const data = JSON.parse(localStorage.getItem('bookMarkState'));
   if (!data) return;
   const { bookMarksArr, countBookMarks } = data;
   state.bookmarks.bookmarksArr = bookMarksArr;
-  state.bookmarks.countBooMarks = countBookMarks;
+  state.bookmarks.countBookmarks = countBookMarks;
 };
 /**
  * Parses every "quantity,unit,description" ingredient field from the uploaded
@@ -281,7 +281,7 @@ export const removeShoppingList = id => {
     JSON.stringify(state.shoppingListArr),
   );
 };
-export const setShoppingArrFromLocalStortge = () => {
+export const setShoppingArrFromLocalStorage = () => {
   state.shoppingListArr =
     JSON.parse(localStorage.getItem('shoppingListArr')) || [];
 };
@@ -305,8 +305,8 @@ export const loadRecipeCalories = async () => {
     : 'N/A';
 };
 export const addRecipeToMealPlan = data => {
-  const { day, dayOfWeak } = data;
-  const dataOfRecipe = { ...state.recipe, day, dayOfWeak };
+  const { day, dayOfWeek } = data;
+  const dataOfRecipe = { ...state.recipe, day, dayOfWeek };
   state.mealPlanArr.push(dataOfRecipe);
   localStorage.setItem('mealPlanArr', JSON.stringify(state.mealPlanArr));
 };
@@ -314,3 +314,6 @@ export const removeItemFromArr = id => {
   state.mealPlanArr = state.mealPlanArr.filter(el => el.id !== id);
   localStorage.setItem('mealPlanArr', JSON.stringify(state.mealPlanArr));
 };
+
+
+

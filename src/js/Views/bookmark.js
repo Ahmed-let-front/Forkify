@@ -71,7 +71,7 @@ class BookMark {
   /**
    * @param {import('../model.js').Recipe[]} bookMarkArr
    */
-  renderRecipesFromLocalStortge(bookMarkArr) {
+  renderRecipesFromLocalStorage(bookMarkArr) {
     const markup = bookMarkArr
       .map(rec => this.#generateMarkupRecupesList(rec))
       .join('');
@@ -130,9 +130,9 @@ class BookMark {
     const allPreviewList =
       this.#elements.bookMarkList.querySelectorAll('.preview-list');
     allPreviewList.forEach(el => {
-      const idEl = el.dataset.id;
-      if (!idEl) return;
-      if (idEl === id) el.classList.add('bg-cream-200');
+      const idle = el.dataset.id;
+      if (!idle) return;
+      if (idle === id) el.classList.add('bg-cream-200');
     });
   }
   toggleBookMarkListShape() {
@@ -163,3 +163,5 @@ class BookMark {
   }
 }
 export default new BookMark();
+
+

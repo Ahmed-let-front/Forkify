@@ -23,11 +23,11 @@ const controlRecipe = async () => {
     view.showPopup(err.message, '&times;');
   }
 };
-const controlDataFromLocalStrotge = () => {
-  model.getDataFromLocalStrotgeBookMark();
-  bookMark.updateUiBookMarkCount(model.state.bookmarks.countBooMarks);
+const controlDataFromLocalStorage = () => {
+  model.getDataFromLocalStorageBookMark();
+  bookMark.updateUiBookMarkCount(model.state.bookmarks.countBookmarks);
   if (model.state.bookmarks.bookmarksArr.length === 0) return;
-  bookMark.renderRecipesFromLocalStortge(model.state.bookmarks.bookmarksArr);
+  bookMark.renderRecipesFromLocalStorage(model.state.bookmarks.bookmarksArr);
   const id = window.location.hash.slice(1);
   bookMark.autoSelectedAfterReload(id);
 };
@@ -36,14 +36,14 @@ const controlSearchRes = async query => {
   view.renderSkeletonRes(searchView.parentEl);
   searchView.addHandlerListsResults();
   searchView.unFocusOnSearchInput();
-  pagination.addHandlerPangationNext(controlPangationBtnNext);
-  pagination.addHandlerPangationPrev(controlPangationBtnPrev);
+  pagination.addHandlerPaginationNext(controlPaginationBtnNext);
+  pagination.addHandlerPaginationPrev(controlPaginationBtnPrev);
   searchView.renderResContainerList(await model.loadSearchResData(query));
   searchView.renderPageNum(
     model.state.search.currPage,
-    model.state.search.maxItmes,
+    model.state.search.maxItems,
   );
-  searchView.renderPageCount(model.state.search.maxItmes);
+  searchView.renderPageCount(model.state.search.maxItems);
   if (model.isDataOfResValid()) return;
   view.showContainerBtnsPagination();
 };
@@ -71,22 +71,22 @@ const controlWelcomeView = async e => {
     view.showPopup(err.message, '&times;');
   }
 };
-const controlPangationBtnNext = () => {
+const controlPaginationBtnNext = () => {
   view.renderSkeletonRes(pagination.parentEl);
   const res = model.paginationLoadResNext();
   searchView.renderResContainerList(res);
   searchView.renderPageNum(
     model.state.search.currPage,
-    model.state.search.maxItmes,
+    model.state.search.maxItems,
   );
 };
-const controlPangationBtnPrev = () => {
+const controlPaginationBtnPrev = () => {
   view.renderSkeletonRes(pagination.parentEl);
   const res = model.paginationLoadResPrev();
   searchView.renderResContainerList(res);
   searchView.renderPageNum(
     model.state.search.currPage,
-    model.state.search.maxItmes,
+    model.state.search.maxItems,
   );
 };
 const controlServings = updateTo => {
@@ -98,7 +98,7 @@ const controlServings = updateTo => {
 };
 const controlRemoveBookMark = () => {
   model.removeBookMark(model.state.recipe);
-  bookMark.updateUiBookMarkCount(model.state.bookmarks.countBooMarks);
+  bookMark.updateUiBookMarkCount(model.state.bookmarks.countBookmarks);
   bookMark.removeBookmark(model.state.recipe);
   bookMark.toggleRenderBookmark(model.state.recipe);
 };
@@ -109,7 +109,7 @@ const controlBookMark = () => {
   }
   model.addBookMark(model.state.recipe);
   bookMark.renderRecipes(model.state.bookmarks.bookmarksArr);
-  bookMark.updateUiBookMarkCount(model.state.bookmarks.countBooMarks);
+  bookMark.updateUiBookMarkCount(model.state.bookmarks.countBookmarks);
   bookMark.toggleRenderBookmark(model.state.recipe);
 };
 const controlAddRecipe = async data => {
@@ -119,7 +119,7 @@ const controlAddRecipe = async data => {
     await model.uploadRecipe(data);
     recipeView.render(model.state.recipe);
     bookMark.toggleRenderBookmark(model.state.recipe);
-    bookMark.updateUiBookMarkCount(model.state.bookmarks.countBooMarks);
+    bookMark.updateUiBookMarkCount(model.state.bookmarks.countBookmarks);
     bookMark.renderRecipes(model.state.bookmarks.bookmarksArr);
     window.history.pushState(
       null,
@@ -157,10 +157,10 @@ const controlAddShoppingList = () => {
     view.showPopup(err.message, '&times;');
   }
 };
-const controlAddShoppingListLocalStortge = () => {
-  model.setShoppingArrFromLocalStortge();
+const controlAddShoppingListLocalStorage = () => {
+  model.setShoppingArrFromLocalStorage();
   if (!model.state.shoppingListArr.length) return;
-  shoppingList.renderItemInShoppingListLocalStortge(
+  shoppingList.renderItemInShoppingListLocalStorage(
     model.state.shoppingListArr,
   );
   shoppingList.updateCount(model.state.shoppingListArr);
@@ -188,22 +188,22 @@ const controlAddToMealPlan = data => {
   mealPlan.hiddenModelSelect();
   model.addRecipeToMealPlan(data);
   const lastEl = model.state.mealPlanArr.at(-1);
-  mealPlan.renderReecipeInMealPlan(lastEl);
+  mealPlan.renderRecipeInMealPlan(lastEl);
   mealPlan.updateCountRecipes(model.state.mealPlanArr.length);
   mealPlan.disabledBtn(data.btn);
   view.showPopup('Added successfully.');
 };
-const controlRenderMealLocalStortge = () => {
+const controlRenderMealLocalStorage = () => {
   if (!JSON.parse(localStorage.getItem('mealPlanArr'))) return;
   model.state.mealPlanArr = JSON.parse(localStorage.getItem('mealPlanArr'));
-  mealPlan.renderRecipeInMealPlanFromLocalStortge(model.state.mealPlanArr);
+  mealPlan.renderRecipeInMealPlanFromLocalStorage(model.state.mealPlanArr);
   mealPlan.updateCountRecipes(model.state.mealPlanArr.length);
 };
 const controlDeleteItemMealPlan = parentEl => {
   const id = parentEl.dataset.id;
-  const dayToDelete = parentEl.dataset.dayofweek;
+  const dayToDelete = parentEl.dataset.dayOfWeek;
   mealPlan.removeItem(parentEl);
-  mealPlan.setAbeldBtnsSelect(dayToDelete);
+  mealPlan.setEnabledBtnsSelect(dayToDelete);
   model.removeItemFromArr(id);
   if (model.state.mealPlanArr.length === 0) mealPlan.renderToInitView();
   mealPlan.updateCountRecipes(model.state.mealPlanArr.length);
@@ -228,14 +228,17 @@ const init = () => {
   mealPlan.addHandlerSelectBtn(controlAddToMealPlan);
   mealPlan.addHandlerClickOfRecipeInList(controlClickInRecipeInList);
   mealPlan.addHandlerDeleteBtn(controlDeleteItemMealPlan);
-  controlRenderMealLocalStortge();
+  controlRenderMealLocalStorage();
   view.addHandlerClosePopup();
   bookMark.addHandlerListsBookMarks();
   bookMark.handlerCloseList();
   addRecipe.ListenerOpenModel();
   addRecipe.closeModelHandler();
-  controlAddShoppingListLocalStortge();
+  controlAddShoppingListLocalStorage();
   addRecipe.addHandlerUpload(controlAddRecipe);
-  controlDataFromLocalStrotge();
+  controlDataFromLocalStorage();
 };
 init();
+
+
+

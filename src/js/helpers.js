@@ -30,3 +30,5 @@ export const AJAX = async (url, uploadData) => {
   if (!res.ok || data.results === 0) throw new Error(message);
   return data;
 };
+
+

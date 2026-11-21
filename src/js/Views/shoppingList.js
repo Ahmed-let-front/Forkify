@@ -1,4 +1,4 @@
-import { converDecimalToFraction } from '../model';
+import { convertDecimalToFraction } from '../model';
 class ShoppingList {
   #elements = {
     ShoppingContainer: document.getElementById('shopping-list-container'),
@@ -82,7 +82,7 @@ class ShoppingList {
           >
             <div class="flex items-center gap-4">
               <span class="text-lg md:text-xl font-medium text-charcoal-700 leading-snug">
-                ${ing.quantity ? `${converDecimalToFraction(ing.quantity)} ` : ''}
+                ${ing.quantity ? `${convertDecimalToFraction(ing.quantity)} ` : ''}
                 <span class="text-sm text-charcoal-500">${ing.unit || ''}</span>
                 ${ing.description}
               </span>
@@ -95,7 +95,7 @@ class ShoppingList {
     `;
     return markup;
   }
-  #generateMarkupFromLocalStortge(data) {
+  #generateMarkupFromLocalStorage(data) {
     const markup = `
         ${data
           .map(
@@ -140,7 +140,7 @@ class ShoppingList {
           >
             <div class="flex items-center gap-4">
               <span class="text-lg md:text-xl font-medium text-charcoal-700 leading-snug">
-                ${ing.quantity ? `${converDecimalToFraction(ing.quantity)} ` : ''}
+                ${ing.quantity ? `${convertDecimalToFraction(ing.quantity)} ` : ''}
                 <span class="text-sm text-charcoal-500">${ing.unit || ''}</span>
                 ${ing.description}
               </span>
@@ -165,9 +165,9 @@ class ShoppingList {
       this.#generateMarkup(data),
     );
   }
-  renderItemInShoppingListLocalStortge(data) {
+  renderItemInShoppingListLocalStorage(data) {
     this.#elements.shoppingItemsContainer.innerHTML =
-      this.#generateMarkupFromLocalStortge(data);
+      this.#generateMarkupFromLocalStorage(data);
   }
   removeItem(id) {
     const targetEl = document.querySelector(`[data-id="${id}"]`);
@@ -215,3 +215,6 @@ class ShoppingList {
   }
 }
 export default new ShoppingList();
+
+
+

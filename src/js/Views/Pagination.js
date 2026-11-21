@@ -10,16 +10,18 @@ class Pagination {
   /**
    * @param {() => void} handler
    */
-  addHandlerPangationNext(handler) {
+  addHandlerPaginationNext(handler) {
     this.setParentEl();
     this.#elements.nextPageBtn.addEventListener('click', handler);
   }
   /**
    * @param {() => void} handler
    */
-  addHandlerPangationPrev(handler) {
+  addHandlerPaginationPrev(handler) {
     this.setParentEl();
     this.#elements.prevPageBtn.addEventListener('click', handler);
   }
 }
 export default new Pagination();
+
+

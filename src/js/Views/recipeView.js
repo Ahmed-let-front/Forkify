@@ -1,4 +1,4 @@
-import { converDecimalToFraction } from '../model.js';
+import { convertDecimalToFraction } from '../model.js';
 class Recipe {
   #parentEl = document.getElementById('recipe-container');
   #data;
@@ -138,7 +138,7 @@ class Recipe {
                     <li class="recipe__ingredient text-xl text-charcoal-600">
                             <svg class="w-5 h-5 text-primary-500 shrink-0"><use href="./icons.svg#icon-check"></use></svg>
                             <p>
-                            <strong class="font-bold text-charcoal-800">${ing.quantity ? converDecimalToFraction(ing.quantity) : ''} ${ing.unit}</strong>
+                            <strong class="font-bold text-charcoal-800">${ing.quantity ? convertDecimalToFraction(ing.quantity) : ''} ${ing.unit}</strong>
                             <span>${ing.description}</span>
                             </p>
                         </li>
@@ -209,3 +209,6 @@ class Recipe {
   }
 }
 export default new Recipe();
+
+
+
