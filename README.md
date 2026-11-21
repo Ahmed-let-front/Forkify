@@ -111,7 +111,7 @@ The system map follows a continuous, optimized cycle:
 
 ## 🛠️ Tech Stack & Implementation Details
 
-- **Core Language:** JavaScript (ES6+ Strict OOP & MVC Paradigm)
+- **Core Language:** JavaScript (ES6+ Strict OOP & MVC Paradigm With JsDocs)
 - **Data Fetching:** Native `fetch` API with highly structured `async/await` error handling.
 - **Styles & Layout:** **Tailwind CSS v4.x** (Utilizing advanced CSS-first configuration, fluid utility styling, and custom `@layer components`).
 - **Bundler & Build Tool:** Vite (Optimized production asset splitting and rapid HMR).
