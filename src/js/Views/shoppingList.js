@@ -181,7 +181,7 @@ class ShoppingList {
               class="w-12 h-12 text-primary-400 mx-auto mb-6"
               aria-hidden="true"
             >
-              <use href="/icons.svg#icon-smile-2" />
+              <use href="./icons.svg#icon-smile-2" />
             </svg>
           </div>
           <p class="text-charcoal-500 m-0 text-2xl">
@@ -215,6 +215,3 @@ class ShoppingList {
   }
 }
 export default new ShoppingList();
-
-
-

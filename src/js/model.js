@@ -314,6 +314,3 @@ export const removeItemFromArr = id => {
   state.mealPlanArr = state.mealPlanArr.filter(el => el.id !== id);
   localStorage.setItem('mealPlanArr', JSON.stringify(state.mealPlanArr));
 };
-
-
-

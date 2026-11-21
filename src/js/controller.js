@@ -201,7 +201,7 @@ const controlRenderMealLocalStorage = () => {
 };
 const controlDeleteItemMealPlan = parentEl => {
   const id = parentEl.dataset.id;
-  const dayToDelete = parentEl.dataset.dayOfWeek;
+  const dayToDelete = parentEl.dataset.dayofweek;
   mealPlan.removeItem(parentEl);
   mealPlan.setEnabledBtnsSelect(dayToDelete);
   model.removeItemFromArr(id);
@@ -239,6 +239,3 @@ const init = () => {
   controlDataFromLocalStorage();
 };
 init();
-
-
-

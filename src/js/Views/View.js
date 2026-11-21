@@ -38,17 +38,17 @@ class View {
     `;
     parentEl.innerHTML = markup;
   }
-  #generateMarkupSpiner() {
+  #generateMarkupSpinner() {
     return `
       <div class="flex justify-center items-center py-16" id="spinner">
         <div class="w-12 h-12 rounded-full border-4 border-primary-100 border-t-primary-500 animate-spin-slow"></div>
       </div> `;
   }
   renderSpinner(parentEl) {
-    parentEl.innerHTML = this.#generateMarkupSpiner();
+    parentEl.innerHTML = this.#generateMarkupSpinner();
   }
   addHandlerClosePopup() {
-    this.#elements.closeBtn.addEventListener('click', () => this.removePoup(0));
+    this.#elements.closeBtn.addEventListener('click', () => this.removePopup(0));
   }
   showContainerBtnsPagination() {
     this.#elements.containerBtnsPagination.classList.remove('hidden-container');
@@ -61,14 +61,14 @@ class View {
     this.#elements.popup.classList.add('is-open');
     this.#elements.iconPopup.innerHTML = icon;
     this.#elements.popupMsg.textContent = message;
-    this.removePoup();
+    this.removePopup();
   }
   /**
    * Auto-dismisses the popup after the given delay; the close button relies
    * on passing 0 for an immediate hide.
    * @param {number} [s] - Delay in seconds before dismissal.
    */
-  removePoup(s = 5) {
+  removePopup(s = 5) {
     setTimeout(
       () => this.#elements.popup.classList.remove('is-open'),
       1000 * s,

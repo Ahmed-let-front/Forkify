@@ -99,7 +99,7 @@ class MealPlan {
       this.#generateMarkup(data),
     );
   }
-  setabledAbilityBtnsSelect(data) {
+  setAbilityBtnsSelect(data) {
     data.forEach(el => {
       this.#elements.daysListContainer
         .querySelectorAll('.btn-day-select-day')
@@ -122,7 +122,7 @@ class MealPlan {
     if (noMealMessage) noMealMessage.remove();
     const markup = data.map(el => this.#generateMarkup(el)).join('');
     this.#elements.mealPlanGrid.innerHTML = markup;
-    this.setabledAbilityBtnsSelect(data);
+    this.setAbilityBtnsSelect(data);
   }
   removeAnySelectedRecipe() {
     const resultsList = document.getElementById('results-list');
@@ -225,8 +225,3 @@ class MealPlan {
   }
 }
 export default new MealPlan();
-
-
-
-
-
