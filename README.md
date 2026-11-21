@@ -12,7 +12,7 @@ An advanced, production-grade refactoring of the Forkify application. This archi
 
 
 
-- [**Live Demo:**](https://ahmed-let-front.github.io/Forkify/)
+- [**Live Demo**](https://ahmed-let-front.github.io/Forkify/)
 
 ---
 
